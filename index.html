@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Android-разработка — слайды курса</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/deck.css" />
+</head>
+<body>
+  <div class="hub" id="hub"></div>
+  <script src="js/catalog.js"></script>
+  <script>
+    (function () {
+      const c = window.COURSE;
+      const root = document.getElementById("hub");
+      const blocks = [];
+      c.lectures.forEach((lec) => {
+        let b = blocks.find((x) => x.name === lec.block);
+        if (!b) {
+          b = { name: lec.block, items: [] };
+          blocks.push(b);
+        }
+        b.items.push(lec);
+      });
+      root.innerHTML = `
+        <header class="hub-hero">
+          <img src="${c.photo}" alt="${c.teacher}" />
+          <div>
+            <h1>${c.title}</h1>
+            <p>${c.subtitle}<br>${c.teacher} · ${c.teacherMeta}</p>
+          </div>
+        </header>
+        <div class="blocks">
+          ${blocks
+            .map(
+              (b) => `
+            <section class="block">
+              <h2>${b.name}</h2>
+              <div class="cards">
+                ${b.items
+                  .map(
+                    (lec) => `
+                  <a class="card" href="${lec.href}">
+                    <div class="num">Лекция ${lec.id} · ${lec.points} б.</div>
+                    <h3>${lec.title}</h3>
+                    <div class="goal">${lec.goal}</div>
+                  </a>`
+                  )
+                  .join("")}
+              </div>
+            </section>`
+            )
+            .join("")}
+        </div>
+      `;
+    })();
+  </script>
+</body>
+</html>

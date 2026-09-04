@@ -1,0 +1,236 @@
+{
+  "main": {
+    "id": "e1dd35cd1cf38509",
+    "type": "split",
+    "children": [
+      {
+        "id": "2100f025ad6a3cbe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3ea72b882ff5f1c2",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "lectures/lecture-01-slides-prompt.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "lecture-01-slides-prompt"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "6fbc3bd844867162",
+    "type": "split",
+    "children": [
+      {
+        "id": "bd88e25053967906",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2c05917c4a9149bd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "56db3df56f534f49",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "8e640ac212618a19",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3ad15f39dc588ef1",
+    "type": "split",
+    "children": [
+      {
+        "id": "6d385f6b6990a021",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "63d4d30a37618103",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "PLAN.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "941ff7d0caca5ee6",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "PLAN.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "5ea9e2422292e173",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "0aac421c34f6b761",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "3f5708cfc685924f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "PLAN.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "3ea72b882ff5f1c2",
+  "lastOpenFiles": [
+    "lectures/15-final/slides.js",
+    "lectures/15-final/index.html",
+    "lectures/15-final/plan.md",
+    "lectures/15-final",
+    "lectures/01-vvedenie/slides-prompt.md",
+    "lectures/14-patterns-hilt/slides.js",
+    "lectures/14-patterns-hilt/plan.md",
+    "lectures/14-patterns-hilt/index.html",
+    "lectures/14-patterns-hilt",
+    "lectures/13-architecture/plan.md",
+    "lectures/13-architecture/slides.js",
+    "lectures/13-architecture/index.html",
+    "lectures/13-architecture",
+    "lectures/12-storage/plan.md",
+    "lectures/12-storage/slides.js",
+    "lectures/12-storage/index.html",
+    "lectures/11-coroutines-flow/plan.md",
+    "lectures/09-components/plan.md",
+    "lectures/10-network/plan.md",
+    "lectures/08-fragment-navigation/plan.md",
+    "lectures/07-recyclerview/plan.md",
+    "lectures/06-ui-xml/plan.md",
+    "lectures/05-activity/plan.md",
+    "lectures/04-kotlin-collections/plan.md",
+    "lectures/03-kotlin-oop/plan.md",
+    "lectures/02-kotlin-osnovy/plan.md",
+    "lectures/01-vvedenie/plan.md",
+    "assets/teacher.jpg",
+    "presentation/node_modules/@tailwindcss/postcss/README.md",
+    "presentation/node_modules/recharts/DEVELOPING.md",
+    "presentation/node_modules/ajv/README.md",
+    "presentation/node_modules/shadcn/node_modules/undici/types/README.md",
+    "presentation/node_modules/shadcn/node_modules/undici/docs/docs/api/Util.md",
+    "presentation/node_modules/shadcn/node_modules/undici/docs/docs/best-practices/writing-tests.md",
+    "presentation/node_modules/shadcn/node_modules/undici/docs/docs/best-practices/crawling.md",
+    "presentation/node_modules/shadcn/node_modules/undici/docs/docs/best-practices/proxy.md",
+    "presentation/node_modules/shadcn/node_modules/undici/docs/docs/best-practices/undici-vs-builtin-fetch.md",
+    "presentation/node_modules/webpack/lib/html/favicon.svg",
+    "presentation/node_modules/miniflare/dist/local-explorer-ui/favicon.svg",
+    "lectures/photo_2026-04-03_12-27-15.jpg",
+    "photo_2026-04-03_12-27-15.jpg",
+    "Untitled.canvas"
+  ]
+}
