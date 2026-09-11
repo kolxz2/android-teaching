@@ -959,6 +959,53 @@ tr:last-child td {
   display: block;
 }
 
+.hint-panel {
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+
+.hint-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hint-actions button {
+  border: 0;
+  border-radius: 10px;
+  padding: 9px 14px;
+  background: var(--green-dark);
+  color: #fff;
+  font: 700 13px/1 var(--font);
+  cursor: pointer;
+}
+
+.hint-actions .hint-admin { background: #e8ebef; color: var(--ink); }
+.hint-actions button:disabled { cursor: default; opacity: .55; }
+.hint-timer { color: var(--muted); font: 600 13px/1 var(--mono); }
+.solution-password { display: flex; gap: 8px; margin-top: 10px; }
+.solution-password[hidden] { display: none; }
+.solution-password input { min-width: 220px; padding: 9px 11px; border: 1px solid var(--line); border-radius: 9px; font: 14px/1 var(--mono); }
+.solution-password button { border: 0; border-radius: 9px; padding: 9px 14px; background: var(--green-dark); color: #fff; font-weight: 700; cursor: pointer; }
+.hint-content { margin-top: 14px; padding: 14px 18px; border-left: 4px solid var(--green); background: #eaf8f0; font-size: clamp(16px, 1.3vw, 20px); }
+.hint-content strong { display: block; margin-bottom: 6px; color: var(--green-dark); }
+.hint-content pre { margin-block: 8px 0; padding-top: 32px; }
+
+.command-checker {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+}
+
+.command-checker label { color: var(--muted); font-size: 13px; font-weight: 700; }
+.command-checker textarea { width: 100%; resize: vertical; min-height: 76px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--code-bg); color: var(--code-ink); font: 14px/1.45 var(--mono); }
+.command-check-actions { display: flex; align-items: center; gap: 12px; }
+.command-check-actions button { border: 0; border-radius: 9px; padding: 9px 14px; background: var(--green-dark); color: #fff; font-weight: 700; cursor: pointer; }
+.command-check-actions span { font-size: 13px; }
+.command-check-actions .is-success { color: var(--green-dark); }
+.command-check-actions .is-error { color: #b3261e; }
+
 /* Hub */
 .hub {
   height: 100%;

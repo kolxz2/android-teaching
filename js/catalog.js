@@ -141,5 +141,17 @@ window.COURSE = {
       "points": "15",
       "goal": "Собрать требования курса в одно приложение и зафиксировать, чему научились."
     }
+  ],
+  "practices": [
+    {
+      "id": "git",
+      "kind": "practice",
+      "afterLecture": "01",
+      "slug": "git-practice",
+      "title": "Практика Git: задания Learn Git Branching",
+      "block": "Практика",
+      "href": "practice/git/index.html",
+      "goal": "Шесть простых задач: теория, условие, лёгкая подсказка и решение с таймером."
+    }
   ]
 };

@@ -17,7 +17,14 @@
       const c = window.COURSE;
       const root = document.getElementById("hub");
       const blocks = [];
-      c.lectures.forEach((lec) => {
+      const practices = c.practices || [];
+      const items = c.lectures.flatMap((lecture) => [
+        lecture,
+        ...practices
+          .filter((practice) => practice.afterLecture === lecture.id)
+          .map((practice) => ({ ...practice, block: lecture.block }))
+      ]);
+      items.forEach((lec) => {
         let b = blocks.find((x) => x.name === lec.block);
         if (!b) {
           b = { name: lec.block, items: [] };
@@ -44,7 +51,7 @@
                   .map(
                     (lec) => `
                   <a class="card" href="${lec.href}">
-                    <div class="num">Лекция ${lec.id} · ${lec.points} б.</div>
+                    <div class="num">${lec.kind === "practice" ? "Практика" : `Лекция ${lec.id} · ${lec.points} б.`}</div>
                     <h3>${lec.title}</h3>
                     <div class="goal">${lec.goal}</div>
                   </a>`

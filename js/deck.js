@@ -18,7 +18,7 @@
 
   function inline(s) {
     return escapeHtml(s)
-      .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+|\.\.?\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/`([^`]+)`/g, "<code>$1</code>")
       .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   }
@@ -216,7 +216,13 @@
       }
 
       const para = [];
-      while (i < lines.length && lines[i].trim() && !/^\s*[-|`]/.test(lines[i]) && !/^\s*\d+\.\s+/.test(lines[i])) {
+      while (
+        i < lines.length &&
+        lines[i].trim() &&
+        !/^\s*[-|]/.test(lines[i]) &&
+        !lines[i].trim().startsWith("```") &&
+        !/^\s*\d+\.\s+/.test(lines[i])
+      ) {
         para.push(lines[i]);
         i += 1;
       }
@@ -263,6 +269,104 @@
     if (!badge) return "";
     if (/домашн/i.test(badge)) return "badge is-hw";
     return "badge";
+  }
+
+  function attachSolution(el, solution) {
+    if (!solution) return;
+    const panel = document.createElement("div");
+    panel.className = "hint-panel";
+    panel.innerHTML = `
+      <div class="hint-actions">
+        <button class="hint-request" type="button">Запросить решение</button>
+        <button class="hint-admin" type="button">Открыть по паролю</button>
+        <span class="hint-timer" aria-live="polite"></span>
+      </div>
+      <form class="solution-password" hidden>
+        <input type="password" autocomplete="off" aria-label="Пароль преподавателя" placeholder="Пароль преподавателя" />
+        <button type="submit">Открыть</button>
+      </form>
+      <div class="hint-content" hidden><strong>Решение</strong>${renderMarkdown(solution)}</div>`;
+    el.appendChild(panel);
+
+    const request = panel.querySelector(".hint-request");
+    const admin = panel.querySelector(".hint-admin");
+    const timer = panel.querySelector(".hint-timer");
+    const content = panel.querySelector(".hint-content");
+    const passwordForm = panel.querySelector(".solution-password");
+    const passwordInput = passwordForm.querySelector("input");
+    let interval = null;
+
+    const reveal = () => {
+      if (interval) clearInterval(interval);
+      content.hidden = false;
+      request.disabled = true;
+      admin.hidden = true;
+      passwordForm.hidden = true;
+      timer.textContent = "Решение открыто";
+    };
+
+    request.addEventListener("click", () => {
+      if (request.disabled) return;
+      request.disabled = true;
+      let remaining = 300;
+      const update = () => {
+        const minutes = Math.floor(remaining / 60);
+        const seconds = String(remaining % 60).padStart(2, "0");
+        timer.textContent = `Решение откроется через ${minutes}:${seconds}`;
+        if (remaining <= 0) reveal();
+        remaining -= 1;
+      };
+      update();
+      interval = setInterval(update, 1000);
+    });
+
+    admin.addEventListener("click", () => {
+      passwordForm.hidden = !passwordForm.hidden;
+      if (!passwordForm.hidden) passwordInput.focus();
+    });
+
+    passwordForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (passwordInput.value === "valeraVip04") reveal();
+      else {
+        passwordInput.value = "";
+        timer.textContent = "Неверный пароль";
+        passwordInput.focus();
+      }
+    });
+  }
+
+  function attachCommandCheck(el, checks) {
+    if (!checks || !checks.length) return;
+    const checker = document.createElement("div");
+    checker.className = "command-checker";
+    checker.innerHTML = `
+      <label>Команды студента</label>
+      <textarea rows="4" spellcheck="false" placeholder="Введите выполненные команды, по одной в строке"></textarea>
+      <div class="command-check-actions">
+        <button type="button">Проверить</button>
+        <span aria-live="polite"></span>
+      </div>`;
+    el.appendChild(checker);
+    const input = checker.querySelector("textarea");
+    const result = checker.querySelector("span");
+    checker.querySelector("button").addEventListener("click", () => {
+      const commands = input.value.toLowerCase().replace(/\r\n/g, "\n").trim();
+      let offset = 0;
+      const missing = [];
+      checks.forEach(([pattern, label]) => {
+        const match = new RegExp(pattern, "i").exec(commands.slice(offset));
+        if (match) offset += match.index + match[0].length;
+        else missing.push(label);
+      });
+      if (!missing.length) {
+        result.className = "is-success";
+        result.textContent = "Последовательность содержит все обязательные шаги.";
+      } else {
+        result.className = "is-error";
+        result.textContent = `Не найдено: ${missing.join("; ")}.`;
+      }
+    });
   }
 
   function renderSlide(s, i) {
@@ -340,6 +444,8 @@
 
     inner += `<div class="body">${renderMarkdown(s.body || "")}</div>`;
     el.innerHTML = brand + inner;
+    attachCommandCheck(el, s.commandChecks);
+    attachSolution(el, s.solution);
 
     if (s.type === "title" && data.photo) {
       const img = document.createElement("img");
@@ -403,6 +509,8 @@
   });
 
   document.addEventListener("keydown", (e) => {
+    const interactive = e.target.closest("input, textarea, select, button, form, [contenteditable='true']");
+    if (interactive) return;
     if (["ArrowRight", "PageDown", " ", "Enter"].includes(e.key)) {
       e.preventDefault();
       next();
