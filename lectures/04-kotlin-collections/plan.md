@@ -1,33 +1,42 @@
-# Лекция 04. Kotlin: коллекции, ошибки, generics. Первое Android-приложение
+# Лекция 04. Ошибки, паттерны и первое Android-приложение
 
-**Блок:** Язык  
-**Длительность:** пара 90 мин (теория + живая практика)  
-**Ветка / PR:** `lecture-04`  
-**Баллы:** 6
+**Блок:** Переход от языка к Android  
+**Длительность:** 90 минут  
+**Объём:** 59 слайдов  
+**Ветка / PR:** `lecture-04`
 
 ## Цель
 
-Уверенно работать с коллекциями и исключениями; собрать первое Activity.
+Научиться организовывать Kotlin-код с помощью небольших функций, композиции и простых паттернов, а затем применить эти приёмы в первом Android-экране.
 
-## Теория
+## Содержание
 
-- Коллекции: List, Set, Map; mutable / immutable
-- Операции: map, filter, find, groupBy, forEach
-- Исключения: try / catch / finally, throw, свои исключения
-- Generics: зачем, простой пример (List<T>, свой класс)
-- Мост к Android: что такое Activity, как устроен модуль app
+- Kotlin-идиомы: неизменяемые данные, guard clauses, extension- и scope-функции
+- Валидация, исключения и sealed-результаты
+- Практические паттерны: Strategy, Factory, Repository, State
+- Разделение UI и бизнес-логики
+- Первое Android-приложение: модуль `app`, manifest, Activity, XML и обработка нажатия
+- Однонаправленное обновление состояния экрана
 
-## Практика на паре
+## Границы темы
 
-- Задачи на коллекции
-- Создание Activity, TextView / Button из шаблона, обработка клика
+- Жизненный цикл и Context — лекция 5
+- Полная XML-вёрстка — лекция 6
+- RecyclerView — лекция 7
+- MVVM, Clean Architecture и SOLID — лекция 13
+- GoF-паттерны и Dependency Injection — лекция 14
 
-## Домашнее задание
+## Практика
 
-- Практика: коллекции + обработка ошибок
-- Мини-экран: кнопка меняет текст / счётчик
-- PR lecture-04
+Студенты переносят модель операций из лекции 2 в Android-приложение. Кнопка создаёт демонстрационную операцию, обычный Kotlin-код рассчитывает новое состояние, Activity отображает результат.
 
-## Дальше
+## Официальные источники
 
-Лекция 5 — Activity: Context, UI, жизненный цикл, навигация
+- [Kotlin idioms](https://kotlinlang.org/docs/idioms.html)
+- [Extensions](https://kotlinlang.org/docs/extensions.html)
+- [Higher-order functions and lambdas](https://kotlinlang.org/docs/lambdas.html)
+- [Scope functions](https://kotlinlang.org/docs/scope-functions.html)
+- [Exceptions](https://kotlinlang.org/docs/exceptions.html)
+- [Android app architecture](https://developer.android.com/topic/architecture)
+- [Architecture recommendations](https://developer.android.com/topic/architecture/recommendations)
+- [Activities](https://developer.android.com/guide/components/activities/intro-activities)

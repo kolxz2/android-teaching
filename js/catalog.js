@@ -4,7 +4,7 @@ window.COURSE = {
   "teacher": "Сучёв Николай Евгеньевич",
   "teacherMeta": "Android-разработчик · Т-Банк · команда Вовлечение",
   "photo": "assets/teacher.jpg",
-  "subtitle": "15 лекций · пара 1,5 часа · сквозной проект",
+  "subtitle": "15 занятий · пара 1,5 часа · сквозной проект",
   "lectures": [
     {
       "id": "01",
@@ -27,20 +27,20 @@ window.COURSE = {
     {
       "id": "03",
       "slug": "03-kotlin-oop",
-      "title": "Kotlin: классы и ООП",
+      "title": "Kotlin: ООП и функциональная обработка данных",
       "block": "Язык",
       "href": "lectures/03-kotlin-oop/index.html",
       "points": "6",
-      "goal": "Моделировать данные классами и понимать ООП на Kotlin."
+      "goal": "Моделировать предметную область классами и обрабатывать коллекции объектов с помощью лямбд."
     },
     {
       "id": "04",
       "slug": "04-kotlin-collections",
-      "title": "Kotlin: коллекции, ошибки, generics. Первое Android-приложение",
-      "block": "Язык",
+      "title": "Ошибки, паттерны и первое Android-приложение",
+      "block": "Переход от языка к Android",
       "href": "lectures/04-kotlin-collections/index.html",
-      "points": "6",
-      "goal": "Уверенно работать с коллекциями и исключениями; собрать первое Activity."
+      "points": "",
+      "goal": "Организовать Kotlin-код с помощью простых паттернов и применить его в первом Android-экране."
     },
     {
       "id": "05",

@@ -47,10 +47,10 @@ LECTURE_META = [
     {
         "id": "02",
         "slug": "02-kotlin-osnovy",
-        "title": "Kotlin: основы языка",
+        "title": "Kotlin: основы языка и коллекции",
         "block": "Язык",
         "minutes": "90",
-        "goal": "Писать простые программы на Kotlin без Android.",
+        "goal": "Писать простые программы на Kotlin без Android и обрабатывать наборы данных через коллекции.",
         "theory": [
             "Зачем Kotlin в Android, отличие от Java (кратко)",
             "Переменные: val / var, вывод типов",
@@ -58,15 +58,20 @@ LECTURE_META = [
             "Null safety: ?, ?: , !!, ?.",
             "Функции: параметры, возвращаемый тип, default / named args, single-expression",
             "Управляющие конструкции: if как выражение, when, циклы for / while",
+            "Массивы: Array<T>, массивы примитивов, преобразование в List",
+            "Коллекции: List, Set, Map, ArrayDeque; read-only и mutable варианты",
+            "Реализации: ArrayList, HashSet, LinkedHashSet, HashMap, LinkedHashMap",
+            "Операции: filter, map, find, any, all, count, сортировка и groupBy",
         ],
         "practice": [
             "Kotlin-файл / scratch в Android Studio (без UI)",
             "Несколько функций: ввод → обработка → вывод в Log / консоль",
+            "Задачи на выбор коллекции и цепочки преобразований",
         ],
         "homework": [
-            "Набор задач: переменные, функции, when, циклы",
-            "Решения в отдельном модуле или пакете kotlin.basics",
-            "Commit + PR lecture-02",
+            "Пройти все задания раздела Introduction в Kotlin Koans",
+            "Пройти все задания раздела Collections в Kotlin Koans",
+            "Приложить два скриншота с зелёными отметками выполнения",
         ],
         "branch": "lecture-02",
         "points": "6",
@@ -75,10 +80,10 @@ LECTURE_META = [
     {
         "id": "03",
         "slug": "03-kotlin-oop",
-        "title": "Kotlin: классы и ООП",
+        "title": "Kotlin: ООП и функциональная обработка данных",
         "block": "Язык",
         "minutes": "90",
-        "goal": "Моделировать данные классами и понимать ООП на Kotlin.",
+        "goal": "Моделировать данные классами и обрабатывать коллекции объектов с помощью лямбд.",
         "theory": [
             "Класс, свойства, конструкторы, init",
             "Видимость, this",
@@ -88,6 +93,8 @@ LECTURE_META = [
             "Data-классы",
             "enum, sealed class / sealed interface",
             "object (синглтон), companion object, анонимные объекты",
+            "Лямбды, функции высшего порядка и цепочки обработки коллекций",
+            "Ссылки на функции, fold и Sequence",
         ],
         "practice": [
             "Модель предметной области курса (Task, User, статусы через enum / sealed)",

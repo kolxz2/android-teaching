@@ -1,64 +1,112 @@
+const content = (title, body, notes = "") => ({ type: "content", title, body, notes });
+const section = (title, subtitle, outcome) => ({ type: "section", title, subtitle, outcome });
+const practice = (title, body, solution) => ({ type: "practice", title, badge: "Практика", body, solution });
+
 window.DECK = {
-  "course": "Android-разработка",
-  "lecture": 4,
-  "lectureId": "04",
-  "slug": "04-kotlin-collections",
-  "title": "Kotlin: коллекции, ошибки, generics. Первое Android-приложение",
-  "block": "Язык",
-  "teacher": "Сучёв Николай Евгеньевич",
-  "teacherMeta": "Android-разработчик · Т-Банк · команда Вовлечение",
-  "hub": "../../index.html",
-  "photo": "../../assets/teacher.jpg",
-  "slides": [
-    {
-      "type": "title",
-      "title": "Android-разработка",
-      "subtitle": "Лекция 4. Kotlin: коллекции, ошибки, generics. Первое Android-приложение",
-      "body": "- Курс из 15 лекций · пара 1,5 часа\n- Блок: **Язык**\n- Ветка: `lecture-04` · 6 баллов\n- Преподаватель: Сучёв Николай Евгеньевич",
-      "kicker": "04 / 15"
-    },
-    {
-      "type": "content",
-      "title": "Что вы умеете к концу пары",
-      "body": "- Уверенно работать с коллекциями и исключениями; собрать первое Activity.\n- Коллекции: List, Set, Map; mutable / immutable\n- Операции: map, filter, find, groupBy, forEach\n- Исключения: try / catch / finally, throw, свои исключения"
-    },
-    {
-      "type": "section",
-      "title": "Теория",
-      "subtitle": "Kotlin: коллекции, ошибки, generics. Первое Android-приложение"
-    },
-    {
-      "type": "content",
-      "title": "План теории",
-      "body": "- Коллекции: List, Set, Map; mutable / immutable\n- Операции: map, filter, find, groupBy, forEach\n- Исключения: try / catch / finally, throw, свои исключения\n- Generics: зачем, простой пример (List<T>, свой класс)\n- Мост к Android: что такое Activity, как устроен модуль app"
-    },
-    {
-      "type": "section",
-      "title": "Практика",
-      "subtitle": "На паре, руками",
-      "badge": "Практика"
-    },
-    {
-      "type": "content",
-      "title": "Практика на паре",
-      "badge": "Практика",
-      "body": "- Задачи на коллекции\n- Создание Activity, TextView / Button из шаблона, обработка клика"
-    },
-    {
-      "type": "content",
-      "title": "Домашнее задание",
-      "badge": "Домашнее задание",
-      "body": "- Практика: коллекции + обработка ошибок\n- Мини-экран: кнопка меняет текст / счётчик\n- PR lecture-04\n\nДедлайн: **7 дней**. Ветка `lecture-04`, PR в `main`."
-    },
-    {
-      "type": "content",
-      "title": "Что дальше",
-      "body": "- Лекция 5 — Activity: Context, UI, жизненный цикл, навигация\n- Git-процесс тот же: ветка → commit → push → PR."
-    },
-    {
-      "type": "section",
-      "title": "Вопросы",
-      "subtitle": "Сучёв Николай Евгеньевич · Т-Банк, команда Вовлечение"
-    }
-  ]
+  course: "Android-разработка",
+  lecture: 4,
+  lectureId: "04",
+  slug: "04-kotlin-collections",
+  title: "Ошибки, паттерны и первое Android-приложение",
+  block: "Переход от языка к Android",
+  teacher: "Сучёв Николай Евгеньевич",
+  teacherMeta: "Android-разработчик · Т-Банк · команда Вовлечение",
+  hub: "../../index.html",
+  photo: "../../assets/teacher.jpg",
+  slides: [
+    { type: "title", title: "Android-разработка", subtitle: "Лекция 4. Ошибки, паттерны и первое Android-приложение", kicker: "04", body: "- 59 слайдов · 90 минут\n- От моделей Kotlin к организованному коду\n- В конце запускаем первый Android-экран\n- Ветка: `lecture-04`" },
+    content("Результат занятия", "- Разбивать задачу на небольшие функции и типы\n- Передавать поведение через лямбды и интерфейсы\n- Представлять ошибочный результат явно\n- Отделять бизнес-логику от Android-классов\n- Запускать Activity и обрабатывать нажатие"),
+    { type: "content", title: "Маршрут лекции", layout: "roadmap", body: "1. Kotlin-идиомы\n2. Функции как данные\n3. Ошибки\n4. Паттерны\n5. Android-экран" },
+    content("Границы темы", "- Коллекции уже знакомы по лекции 2, здесь они нужны для примеров\n- Жизненный цикл Activity подробно разбирается в лекции 5\n- XML и ViewGroup подробно разбираются в лекции 6\n- MVVM и Clean Architecture остаются для лекции 13\n- Каталог GoF-паттернов и DI остаются для лекции 14"),
+    content("Официальные материалы", "- [Kotlin idioms](https://kotlinlang.org/docs/idioms.html)\n- [Lambdas](https://kotlinlang.org/docs/lambdas.html)\n- [Scope functions](https://kotlinlang.org/docs/scope-functions.html)\n- [Android architecture](https://developer.android.com/topic/architecture)\n- [Activities](https://developer.android.com/guide/components/activities/intro-activities)"),
+
+    section("Kotlin-идиомы", "Код выражает намерение и ограничивает неправильные состояния", "Студент улучшает прямолинейный код без лишней архитектуры."),
+    content("Неизменяемое состояние", "```kotlin\ndata class UiState(\n    val balance: Long,\n    val message: String?\n)\n\nval next = current.copy(balance = current.balance + 500)\n```\nНовое состояние проще сравнивать, проверять и отображать.", "https://kotlinlang.org/docs/coding-conventions.html#immutability"),
+    content("Guard clause", "```kotlin\nfun withdraw(balance: Long, amount: Long): Long {\n    if (amount <= 0) return balance\n    if (amount > balance) return balance\n    return balance - amount\n}\n```\nРанние выходы оставляют основной сценарий без глубокой вложенности."),
+    content("Небольшая функция", "```kotlin\nfun isValidAmount(amount: Long) = amount > 0\nfun formattedAmount(amount: Long) = \"$amount ₽\"\n```\nИмя функции объясняет правило и создаёт точку для теста."),
+    content("Expression style", "```kotlin\nfun sign(type: TransactionType): Long = when (type) {\n    TransactionType.INCOME -> 1\n    TransactionType.EXPENSE -> -1\n}\n```\n`if`, `when` и `try` могут возвращать значения."),
+    content("Параметры по умолчанию", "```kotlin\nfun transaction(\n    amount: Long,\n    comment: String? = null,\n    type: TransactionType = TransactionType.EXPENSE\n): Transaction\n```\nОдин API покрывает обычный и расширенный сценарий."),
+    content("Extension-функция", "```kotlin\nfun Long.asRubles(): String = \"$this ₽\"\n\nval label = transaction.amount.asRubles()\n```\nExtension добавляет удобный вызов без изменения исходного класса. [Документация](https://kotlinlang.org/docs/extensions.html)"),
+    content("Extension не меняет класс", "```kotlin\nfun Transaction.displayText(): String =\n    \"${type.name}: ${amount.asRubles()}\"\n```\nФункция разрешается статически и не получает доступ к private-членам."),
+    content("Nullable extension", "```kotlin\nfun String?.orDash(): String =\n    if (this.isNullOrBlank()) \"—\" else this\n```\nПроверка nullable-значения сосредоточена в одном месте."),
+    content("Пять scope functions", "| Функция | Объект внутри | Возвращает |\n| let | `it` | результат блока |\n| run | `this` | результат блока |\n| with | `this` | результат блока |\n| apply | `this` | исходный объект |\n| also | `it` | исходный объект |\n\n[Документация](https://kotlinlang.org/docs/scope-functions.html)"),
+    content("let", "```kotlin\ntransaction.comment?.let { comment ->\n    println(comment)\n}\n```\nБлок выполняется только для значения, отличного от `null`."),
+    content("apply", "```kotlin\nval label = TextView(this).apply {\n    text = \"Баланс\"\n    textSize = 24f\n}\n```\n`apply` возвращает настроенный объект."),
+    content("also", "```kotlin\nval saved = repository.add(transaction)\n    .also { println(\"Saved: $it\") }\n```\n`also` подходит для дополнительного действия и возвращает исходное значение."),
+    content("Вложенные scope functions", "```kotlin\n// Трудно понять, где this и it\naccount?.let {\n    it.owner.run { println(length) }\n}\n```\nЕсли цепочка затрудняет чтение, обычные переменные лучше."),
+    practice("Рефакторинг форматирования", "Создайте `Long.asRubles()`, `String?.orDash()` и `Transaction.displayText()`. Выведите сумму, тип и комментарий одной строкой.", "```kotlin\nfun Long.asRubles() = \"$this ₽\"\nfun String?.orDash() = if (isNullOrBlank()) \"—\" else this\nfun Transaction.displayText() =\n    \"${type.name}: ${amount.asRubles()}, ${comment.orDash()}\"\n```"),
+
+    section("Функции как данные", "Лямбды передают правило, а не только значение", "Студент выделяет небольшую Strategy без лишнего класса."),
+    content("Лямбда", "```kotlin\nval isExpense: (Transaction) -> Boolean = { transaction ->\n    transaction.type == TransactionType.EXPENSE\n}\n```\nФункциональный тип описывает параметры и результат. [Документация](https://kotlinlang.org/docs/lambdas.html)"),
+    content("Параметр it", "```kotlin\nval positive: (Long) -> Boolean = { it > 0 }\n```\nДля одного параметра Kotlin предоставляет имя `it`. Явное имя лучше, если смысл неочевиден."),
+    content("Функция высшего порядка", "```kotlin\nfun select(\n    items: List<Transaction>,\n    predicate: (Transaction) -> Boolean\n): List<Transaction> = items.filter(predicate)\n```\nФункция принимает поведение как аргумент."),
+    content("Trailing lambda", "```kotlin\nval expenses = select(transactions) { transaction ->\n    transaction.type == TransactionType.EXPENSE\n}\n```\nПоследняя лямбда выносится за круглые скобки."),
+    content("Преобразование данных", "```kotlin\nval labels = transactions\n    .filter { it.amount > 0 }\n    .map { it.displayText() }\n```\nЦепочка описывает результат: отбор, затем преобразование."),
+    content("Проверки набора", "```kotlin\nval hasLarge = transactions.any { it.amount > 10_000 }\nval allValid = transactions.all { it.amount > 0 }\nval count = transactions.count {\n    it.type == TransactionType.EXPENSE\n}\n```"),
+    content("Безопасный поиск", "```kotlin\nval item = transactions.find { it.id == targetId }\nval first = transactions.firstOrNull()\n```\nБезопасные варианты возвращают nullable-значение вместо исключения."),
+    content("Группировка и индекс", "```kotlin\nval byType = transactions.groupBy { it.type }\nval byId = transactions.associateBy { it.id }\n```\n`groupBy` хранит список на ключ, `associateBy` — одно значение."),
+    content("fold", "```kotlin\nval balance = transactions.fold(0L) { total, item ->\n    total + item.amount * sign(item.type)\n}\n```\nАккумулятор переносит промежуточный результат между элементами."),
+    content("Sequence", "```kotlin\nval result = transactions.asSequence()\n    .filter { it.amount > 0 }\n    .map { it.displayText() }\n    .take(10)\n    .toList()\n```\nSequence вычисляет элементы по мере запроса, но нужен не для каждой цепочки."),
+    content("Ссылка на функцию", "```kotlin\nfun isValid(item: Transaction) = item.amount > 0\n\nval valid = transactions.filter(::isValid)\nval labels = valid.map(Transaction::displayText)\n```"),
+    content("Strategy как функция", "```kotlin\ntypealias FeePolicy = (Long) -> Long\n\nval noFee: FeePolicy = { 0L }\nval percentFee: FeePolicy = { amount -> amount / 100 }\n```\nДля маленькой стратегии отдельный класс не обязателен."),
+    practice("Фильтр операций", "Напишите функцию, которая принимает список и predicate, оставляет подходящие операции, сортирует их по убыванию id и возвращает строки.", "```kotlin\nfun visibleTransactions(items: List<Transaction>, predicate: (Transaction) -> Boolean) =\n    items.filter(predicate)\n        .sortedByDescending { it.id }\n        .map(Transaction::displayText)\n```"),
+
+    section("Ошибки и результат", "Неуспех бывает нарушением контракта или обычным исходом", "Студент выбирает require, исключение или sealed-результат."),
+    content("require", "```kotlin\nfun deposit(amount: Long) {\n    require(amount > 0) { \"Amount must be positive\" }\n}\n```\n`require` сообщает о недопустимом аргументе."),
+    content("check", "```kotlin\nfun start() {\n    check(!isStarted) { \"Already started\" }\n    isStarted = true\n}\n```\n`check` сообщает о неподходящем состоянии объекта."),
+    content("Исключения", "```kotlin\ntry {\n    repository.load()\n} catch (error: IOException) {\n    println(error.message)\n} finally {\n    closeProgress()\n}\n```\n[Документация](https://kotlinlang.org/docs/exceptions.html)"),
+    content("try как выражение", "```kotlin\nval number: Int? = try {\n    text.toInt()\n} catch (_: NumberFormatException) {\n    null\n}\n```"),
+    content("Ожидаемая ошибка", "```kotlin\nsealed interface AddResult {\n    data class Success(val item: Transaction) : AddResult\n    data class Error(val message: String) : AddResult\n}\n```\nОшибка ввода пользователя входит в обычный сценарий."),
+    content("Обработка результата", "```kotlin\nval message = when (val result = add(transaction)) {\n    is AddResult.Success -> result.item.displayText()\n    is AddResult.Error -> result.message\n}\n```"),
+    content("Result", "```kotlin\nfun load(): Result<List<Transaction>> = runCatching {\n    dataSource.readTransactions()\n}\n```\n`Result` хранит значение или пойманное исключение."),
+    content("Валидация без Android", "```kotlin\nfun validateAmount(text: String): AddResult {\n    val amount = text.toLongOrNull()\n        ?: return AddResult.Error(\"Введите число\")\n    if (amount <= 0) return AddResult.Error(\"Сумма должна быть больше нуля\")\n    return AddResult.Success(transaction(amount))\n}\n```"),
+    practice("Проверка суммы", "Обработайте пустую строку, нечисловой ввод, ноль, отрицательное и положительное число. Android-классы использовать нельзя.", "Используйте `toLongOrNull()`, guard clauses и `AddResult.Error`. Положительное значение превращается в `AddResult.Success`."),
+
+    section("Паттерны небольшой программы", "Распределяем ответственность по решаемой проблеме", "Студент узнаёт Strategy, Factory, Repository и State."),
+    content("Что такое паттерн", "Паттерн описывает повторяемую проблему, роли участников и последствия решения. Это словарь для обсуждения кода, а не готовый фрагмент для копирования."),
+    content("Одна ответственность", "```kotlin\nclass TransactionValidator\nclass TransactionFormatter\nclass TransactionRepository\n```\nПроверка, отображение и хранение меняются по разным причинам."),
+    content("Композиция", "```kotlin\nclass AddTransaction(\n    private val repository: TransactionRepository,\n    private val validator: TransactionValidator\n)\n```\nКласс получает нужные роли через конструктор."),
+    content("Strategy", "```kotlin\ninterface FeePolicy {\n    fun fee(amount: Long): Long\n}\n\nclass PercentFee : FeePolicy {\n    override fun fee(amount: Long) = amount / 100\n}\n```"),
+    content("Factory function", "```kotlin\nfun transactionOf(text: String): AddResult {\n    val amount = text.toLongOrNull()\n        ?: return AddResult.Error(\"Введите число\")\n    return AddResult.Success(Transaction(nextId(), amount))\n}\n```\nФабрика скрывает правила создания."),
+    content("Repository", "```kotlin\ninterface TransactionRepository {\n    fun getAll(): List<Transaction>\n    fun add(item: Transaction)\n}\n```\nRepository скрывает место хранения. [Рекомендации Android](https://developer.android.com/topic/architecture/recommendations)"),
+    content("Repository в памяти", "```kotlin\nclass MemoryRepository : TransactionRepository {\n    private val items = mutableListOf<Transaction>()\n    override fun getAll() = items.toList()\n    override fun add(item: Transaction) { items += item }\n}\n```"),
+    content("State", "```kotlin\ndata class MainUiState(\n    val balance: Long = 0,\n    val items: List<Transaction> = emptyList(),\n    val error: String? = null\n)\n```\nState содержит всё, что нужно экрану."),
+    content("Событие меняет состояние", "```kotlin\nfun reduce(state: MainUiState, result: AddResult) = when (result) {\n    is AddResult.Success -> state.copy(\n        items = state.items + result.item, error = null\n    )\n    is AddResult.Error -> state.copy(error = result.message)\n}\n```"),
+    { type: "content", title: "Однонаправленный поток", layout: "roadmap", body: "1. Нажатие\n2. Событие\n3. Расчёт\n4. Новое состояние\n5. Отображение", notes: "https://developer.android.com/topic/architecture/ui-layer#udf" },
+    content("Когда паттерн лишний", "- Нет изменяемого правила, но создан Strategy\n- Нет источника данных, но построено несколько слоёв Repository\n- Один вызов спрятан за многими интерфейсами\n- Имя паттерна важнее читаемости\n\nДля маленькой задачи сначала нужна маленькая функция."),
+
+    section("Первое Android-приложение", "Activity показывает состояние, Kotlin считает результат", "Студент запускает экран и видит изменение после нажатия."),
+    { type: "content", title: "Путь до экрана", layout: "roadmap", body: "1. Модуль app\n2. Manifest\n3. Activity\n4. XML\n5. Запуск" },
+    content("Минимум в модуле app", "```text\napp/src/main/\n  java/.../MainActivity.kt\n  res/layout/activity_main.xml\n  res/values/strings.xml\n  AndroidManifest.xml\n```"),
+    content("Manifest", "```xml\n<application ...>\n    <activity\n        android:name=\".MainActivity\"\n        android:exported=\"true\" />\n</application>\n```\nManifest объявляет Activity системе."),
+    content("MainActivity", "```kotlin\nclass MainActivity : AppCompatActivity() {\n    override fun onCreate(savedInstanceState: Bundle?) {\n        super.onCreate(savedInstanceState)\n        setContentView(R.layout.activity_main)\n    }\n}\n```\n[Activities](https://developer.android.com/guide/components/activities/intro-activities)"),
+    content("XML-разметка", "```xml\n<LinearLayout ...>\n    <TextView android:id=\"@+id/balanceText\" ... />\n    <Button android:id=\"@+id/addButton\" ... />\n</LinearLayout>\n```\nПодробная вёрстка остаётся для лекции 6."),
+    content("Обработчик нажатия", "```kotlin\naddButton.setOnClickListener {\n    val result = addTransaction(\"500\")\n    state = reduce(state, result)\n    render(state)\n}\n```\nЛямбда становится обработчиком события."),
+    content("render", "```kotlin\nprivate fun render(state: MainUiState) {\n    balanceText.text = state.balance.asRubles()\n    errorText.text = state.error.orEmpty()\n    countText.text = state.items.size.toString()\n}\n```\nUI переводит состояние в свойства View."),
+    content("Android остаётся на краю", "| Обычный Kotlin | Android UI |\n| Transaction | Activity |\n| Repository | TextView |\n| validateAmount | Button |\n| reduce | Resources |\n\n[Рекомендации](https://developer.android.com/topic/architecture#general-best-practices)"),
+    practice("Первый интерактивный экран", "Выведите баланс, добавьте кнопку «Добавить 500 ₽», создайте новое состояние по нажатию и вызовите `render(state)`. Расчёт не должен использовать Android-классы.", "Activity хранит учебное состояние. Обработчик вызывает обычную Kotlin-функцию. `render` меняет только свойства View."),
+
+    section("Закрепление", "Паттерн должен делать следующий шаг понятнее", "Студент получает работающий экран и критерии качества."),
+    content("Частые ошибки", "- Scope functions вложены друг в друга\n- Лямбда слишком длинная и не имеет имени\n- Исключение используется для обычной ошибки ввода\n- Activity проверяет, хранит и форматирует данные\n- Repository знает о TextView\n- Паттерн добавлен без решаемой проблемы"),
+    { type: "homework", title: "Домашнее задание", badge: "Домашнее задание", body: "- Перенести модель операций из лекции 2\n- Добавить Repository в памяти\n- Создать `MainUiState` и чистую функцию изменения состояния\n- Показать баланс и число операций\n- Добавить кнопку демонстрационной операции\n- Обработать ошибку через sealed-результат\n- Открыть PR из `lecture-04`" },
+    content("Чек-лист PR", "- [ ] Приложение запускается\n- [ ] Кнопка меняет состояние\n- [ ] Activity не рассчитывает баланс\n- [ ] Модель не импортирует Android SDK\n- [ ] Ошибка представлена явно\n- [ ] В PR приложен скриншот"),
+    content("Шпаргалка", "- [Kotlin idioms](https://kotlinlang.org/docs/idioms.html)\n- [Extensions](https://kotlinlang.org/docs/extensions.html)\n- [Lambdas](https://kotlinlang.org/docs/lambdas.html)\n- [Scope functions](https://kotlinlang.org/docs/scope-functions.html)\n- [Exceptions](https://kotlinlang.org/docs/exceptions.html)\n- [Android recommendations](https://developer.android.com/topic/architecture/recommendations)"),
+    content("Что дальше", "- Лекция 5 подробно разбирает Activity, Context и жизненный цикл\n- Лекция 6 объясняет XML, View и ViewGroup\n- Лекция 7 добавляет список через RecyclerView\n\nМодель и разделение ответственности сохраняются."),
+    { type: "section", title: "Вопросы", subtitle: "Kotlin-идиомы, результат, паттерны и первый Android-экран", body: "- Где обычной функции достаточно?\n- Какой код должен остаться вне Activity?\n- Как состояние попадает на экран?" }
+  ].filter((slide) => !new Set([
+    "Функции как данные",
+    "Лямбда",
+    "Параметр it",
+    "Функция высшего порядка",
+    "Trailing lambda",
+    "Преобразование данных",
+    "Проверки набора",
+    "Безопасный поиск",
+    "Группировка и индекс",
+    "fold",
+    "Sequence",
+    "Ссылка на функцию",
+    "Strategy как функция",
+    "Фильтр операций"
+  ]).has(slide.title))
 };

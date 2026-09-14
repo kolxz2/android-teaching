@@ -1,0 +1,15 @@
+# Temporary browser profiles created during local page checks
+/.edge-test*/
+
+# Diagnostic screenshots
+/lecture-check.png
+/practice-check.png
+
+# Local IDE state
+/.idea
+# Operating-system and editor leftovers
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*~

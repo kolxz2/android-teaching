@@ -56,7 +56,7 @@
 
 ---
 
-## Лекция 2. Kotlin: основы языка
+## Лекция 2. Kotlin: основы языка и коллекции
 
 **Цель:** писать простые программы на Kotlin без Android.
 
@@ -68,21 +68,26 @@
 - Null safety: `?`, `?:`, `!!`, `?.`
 - Функции: параметры, возвращаемый тип, default / named args, single-expression
 - Управляющие конструкции: `if` как выражение, `when`, циклы `for` / `while`
+- Массивы: `Array<T>`, массивы примитивов, преобразование в `List`
+- Коллекции: `List`, `Set`, `Map`, `ArrayDeque`; read-only и mutable варианты
+- Реализации: `ArrayList`, `HashSet`, `LinkedHashSet`, `HashMap`, `LinkedHashMap`
+- Операции: `filter`, `map`, `find`, `any`, `all`, `count`, сортировка и `groupBy`
 
 ### Практика на паре
 
 - Kotlin-файл / scratch в Android Studio (без UI)
 - Несколько функций: ввод → обработка → вывод в Log / консоль
+- Задачи на выбор коллекции и цепочки преобразований
 
 ### ДЗ
 
-- Набор задач: переменные, функции, `when`, циклы
-- Решения в отдельном модуле или пакете `kotlin.basics`
-- Commit + PR `lecture-02`
+- Пройти все задания раздела [Introduction](https://play.kotlinlang.org/koans/Introduction/Hello,%20world!/Task.kt)
+- Пройти все задания раздела [Collections](https://play.kotlinlang.org/koans/Collections/Introduction/Task.kt)
+- Приложить два скриншота с зелёными отметками выполнения
 
 ---
 
-## Лекция 3. Kotlin: классы и ООП
+## Лекция 3. Kotlin: ООП и функциональная обработка данных
 
 **Цель:** моделировать данные классами и понимать ООП на Kotlin.
 
@@ -96,6 +101,9 @@
 - Data-классы
 - `enum`, `sealed class` / `sealed interface`
 - `object` (синглтон), `companion object`, анонимные объекты
+- Лямбды и функции высшего порядка
+- Цепочки `filter`, `map`, `sortedBy`, `groupBy`, `associateBy`, `fold`
+- Ссылки на функции и `Sequence`
 
 ### Практика на паре
 
@@ -109,26 +117,25 @@
 
 ---
 
-## Лекция 4. Kotlin: коллекции, ошибки, generics. Первое Android-приложение
+## Лекция 4. Практические паттерны Kotlin и первое Android-приложение
 
-**Цель:** уверенно работать с коллекциями и исключениями; собрать первое Activity.
+**Цель:** организовать Kotlin-код с помощью небольших функций и паттернов, затем собрать первое Activity.
 
 ### Теория
 
-- Коллекции: `List`, `Set`, `Map`; mutable / immutable
-- Операции: `map`, `filter`, `find`, `groupBy`, `forEach`
-- Исключения: `try` / `catch` / `finally`, `throw`, свои исключения
-- Generics: зачем, простой пример (`List<T>`, свой класс)
+- Kotlin-идиомы, extension- и scope-функции
+- Валидация, исключения и sealed-результаты
+- Strategy, Factory, Repository и State
 - Мост к Android: что такое Activity, как устроен модуль `app`
 
 ### Практика на паре
 
-- Задачи на коллекции
+- Задачи на преобразование коллекций и обработку ошибок
 - Создание Activity, `TextView` / `Button` из шаблона, обработка клика
 
 ### ДЗ
 
-- Практика: коллекции + обработка ошибок
+- Практика: обработка данных и ошибок
 - Мини-экран: кнопка меняет текст / счётчик
 - PR `lecture-04`
 
@@ -466,11 +473,11 @@
 | Введение, Android Studio, история Android, JDK                           | 1      |
 | Git / GitHub (добавлено)                                                 | 1      |
 | Kotlin: переменные, функции, типы                                        | 2      |
-| Циклы и конструкции                                                      | 2      |
+| Циклы, конструкции и коллекции                                           | 2      |
 | Классы, абстрактные классы                                               | 3      |
 | Data / enum / sealed / object / companion                                | 3      |
 | ООП                                                                      | 3      |
-| Коллекции, исключения, generics                                          | 4      |
+| Kotlin-идиомы, ошибки и практические паттерны                            | 4      |
 | Компоненты, Activity, Context, UI, lifecycle, навигация Activity, Bundle | 5      |
 | XML, View, ViewGroup                                                     | 6      |
 | RecyclerView, Custom View                                                | 7      |

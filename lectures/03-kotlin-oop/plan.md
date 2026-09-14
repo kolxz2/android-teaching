@@ -1,35 +1,39 @@
-# Лекция 03. Kotlin: классы и ООП
+# Лекция 03. Kotlin: ООП и функциональная обработка данных
 
 **Блок:** Язык  
-**Длительность:** пара 90 мин (теория + живая практика)  
-**Ветка / PR:** `lecture-03`  
-**Баллы:** 6
+**Длительность:** 90 минут  
+**Объём:** 53 слайда  
+**Ветка / PR:** `lecture-03`
 
 ## Цель
 
-Моделировать данные классами и понимать ООП на Kotlin.
+Научиться моделировать предметную область классами Kotlin, защищать состояние объекта и обрабатывать коллекции объектов с помощью лямбд и функций высшего порядка.
 
-## Теория
+## План занятия
 
-- Класс, свойства, конструкторы, init
-- Видимость, this
-- Наследование, open, override
-- Абстрактные классы и интерфейсы
-- Принципы ООП: инкапсуляция, наследование, полиморфизм, абстракция
-- Data-классы
-- enum, sealed class / sealed interface
-- object (синглтон), companion object, анонимные объекты
-
-## Практика на паре
-
-- Модель предметной области курса (Task, User, статусы через enum / sealed)
+- 0–8 минут — связь объектов с данными из коллекций
+- 8–30 минут — классы, свойства, конструкторы, методы и видимость
+- 30–45 минут — инкапсуляция и практика с моделью счёта
+- 45–68 минут — наследование, абстракция, интерфейсы и полиморфизм
+- 68–78 минут — `data class`, `enum`, `sealed`, `object`
+- 78–88 минут — лямбды, функции высшего порядка и цепочки коллекций
+- 88–90 минут — итог и домашнее задание
 
 ## Домашнее задание
 
-- Иерархия классов + data-классы + sealed
-- Самопроверка по ООП (короткий чеклист в README)
-- PR lecture-03
+Собрать небольшую предметную модель с инкапсуляцией, интерфейсом, data-классом и sealed-результатом. Открыть PR из ветки `lecture-03`.
 
-## Дальше
+## Официальные источники
 
-Лекция 4 — коллекции, ошибки, generics, первое Android-приложение
+- [Классы](https://kotlinlang.org/docs/classes.html)
+- [Свойства](https://kotlinlang.org/docs/properties.html)
+- [Видимость](https://kotlinlang.org/docs/visibility-modifiers.html)
+- [Наследование](https://kotlinlang.org/docs/inheritance.html)
+- [Интерфейсы](https://kotlinlang.org/docs/interfaces.html)
+- [Data-классы](https://kotlinlang.org/docs/data-classes.html)
+- [Enum-классы](https://kotlinlang.org/docs/enum-classes.html)
+- [Sealed-классы и интерфейсы](https://kotlinlang.org/docs/sealed-classes.html)
+- [Object declarations](https://kotlinlang.org/docs/object-declarations.html)
+- [Лямбды и функции высшего порядка](https://kotlinlang.org/docs/lambdas.html)
+- [Операции с коллекциями](https://kotlinlang.org/docs/collection-operations.html)
+- [Sequence](https://kotlinlang.org/docs/sequences.html)
