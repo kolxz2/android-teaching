@@ -51,7 +51,7 @@
                   .map(
                     (lec) => `
                   <a class="card" href="${lec.href}">
-                    <div class="num">${lec.kind === "practice" ? "Практика" : `Лекция ${lec.id} · ${lec.points} б.`}</div>
+                    <div class="num">${lec.kind === "practice" ? "Практика" : `Лекция ${lec.id}${lec.points ? ` · ${lec.points} б.` : ""}`}</div>
                     <h3>${lec.title}</h3>
                     <div class="goal">${lec.goal}</div>
                   </a>`

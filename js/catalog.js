@@ -18,11 +18,11 @@ window.COURSE = {
     {
       "id": "02",
       "slug": "02-kotlin-osnovy",
-      "title": "Kotlin: основы языка",
+      "title": "Kotlin: основы языка и коллекции",
       "block": "Язык",
       "href": "lectures/02-kotlin-osnovy/index.html",
-      "points": "6",
-      "goal": "Писать простые программы на Kotlin без Android."
+      "points": "",
+      "goal": "Писать Kotlin-код без Android: синтаксис, null safety, функции и основные операции с коллекциями."
     },
     {
       "id": "03",

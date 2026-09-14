@@ -183,6 +183,8 @@ body {
 .body :not(pre) > code,
 .code-inline {
   font-family: var(--mono);
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
   font-size: 0.86em;
   background: #eceff3;
   color: var(--ink);
@@ -235,6 +237,8 @@ pre { position: relative; }
 pre code {
   display: block;
   font-family: var(--mono);
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
   font-size: clamp(16px, 1.4vw, 22px);
   line-height: 1.55;
   background: transparent;
