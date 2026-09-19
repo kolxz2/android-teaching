@@ -152,6 +152,16 @@ window.COURSE = {
       "block": "Практика",
       "href": "practice/git/index.html",
       "goal": "Шесть простых задач: теория, условие, лёгкая подсказка и решение с таймером."
+    },
+    {
+      "id": "kotlin-02",
+      "kind": "practice",
+      "afterLecture": "02",
+      "slug": "kotlin-02-practice",
+      "title": "Практика 02: Kotlin, массивы и Map",
+      "block": "Язык",
+      "href": "practice/kotlin-02/index.html",
+      "goal": "Сначала Kotlin Koans, затем задачи из лекции и LeetCode: подсказки через 5 минут, решения через 20 минут."
     }
   ]
 };

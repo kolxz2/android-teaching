@@ -153,6 +153,7 @@ window.DECK = {
   lecture: 2,
   lectureId: "02",
   slug: "02-kotlin-osnovy",
+  disableCopy: true,
   title: "Kotlin: основы языка и коллекции",
   block: "Язык",
   teacher: "Сучёв Николай Евгеньевич",

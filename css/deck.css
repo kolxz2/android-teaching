@@ -941,6 +941,13 @@ tr:last-child td {
   cursor: auto;
 }
 
+.deck.is-copy-protected,
+.deck.is-copy-protected .slide,
+.deck.is-copy-protected .body {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 .notes {
   display: none;
   position: fixed;
@@ -995,6 +1002,7 @@ tr:last-child td {
 .hint-content { margin-top: 14px; padding: 14px 18px; border-left: 4px solid var(--green); background: #eaf8f0; font-size: clamp(16px, 1.3vw, 20px); }
 .hint-content strong { display: block; margin-bottom: 6px; color: var(--green-dark); }
 .hint-content pre { margin-block: 8px 0; padding-top: 32px; }
+.slide.is-timed-solution .hint-content { max-height: 55vh; overflow: auto; }
 
 .command-checker {
   margin-top: 14px;

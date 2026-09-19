@@ -8,6 +8,26 @@
   if (index >= slides.length) index = 0;
 
   let notesOn = false;
+  const timerViews = [];
+  const teacherPassword = "valeraVip04";
+
+  if (data.disableCopy) {
+    deckEl.classList.add("is-copy-protected");
+    document.addEventListener("copy", (event) => event.preventDefault());
+    document.addEventListener("cut", (event) => event.preventDefault());
+  }
+
+  function taskStartKey(taskId) {
+    return `practice-button-start:${data.slug}:${taskId}`;
+  }
+
+  function taskStartedAt(taskId) {
+    return Number(sessionStorage.getItem(taskStartKey(taskId))) || 0;
+  }
+
+  function updatePracticeTimer() {
+    for (const view of timerViews) view();
+  }
 
   function escapeHtml(s) {
     return String(s)
@@ -327,13 +347,98 @@
 
     passwordForm.addEventListener("submit", (event) => {
       event.preventDefault();
-      if (passwordInput.value === "valeraVip04") reveal();
+      if (passwordInput.value === teacherPassword) reveal();
       else {
         passwordInput.value = "";
         timer.textContent = "Неверный пароль";
         passwordInput.focus();
       }
     });
+  }
+
+  function attachTaskTimer(el, taskId) {
+    const panel = document.createElement("div");
+    panel.className = "hint-panel";
+    panel.innerHTML = `<div class="hint-actions"><button class="hint-request" type="button">Запустить таймер</button><span class="hint-timer" aria-live="polite"></span></div>`;
+    el.appendChild(panel);
+    const button = panel.querySelector(".hint-request");
+    const timer = panel.querySelector(".hint-timer");
+    button.addEventListener("click", () => {
+      if (taskStartedAt(taskId)) return;
+      sessionStorage.setItem(taskStartKey(taskId), String(Date.now()));
+      updatePracticeTimer();
+    });
+    timerViews.push(() => {
+      const started = taskStartedAt(taskId);
+      button.hidden = !!started;
+      const elapsed = started ? Math.floor((Date.now() - started) / 1000) : 0;
+      if (!started) timer.textContent = "Отсчёт начнётся после нажатия кнопки";
+      else if (elapsed >= 1200) timer.textContent = "Подсказка и решение открыты";
+      else if (elapsed >= 300) timer.textContent = `Подсказка открыта · до решения ${Math.floor((1200 - elapsed) / 60)}:${String((1200 - elapsed) % 60).padStart(2, "0")}`;
+      else timer.textContent = `До подсказки ${Math.floor((300 - elapsed) / 60)}:${String((300 - elapsed) % 60).padStart(2, "0")} · до решения ${Math.floor((1200 - elapsed) / 60)}:${String((1200 - elapsed) % 60).padStart(2, "0")}`;
+    });
+    updatePracticeTimer();
+  }
+
+  function attachTimedReveal(el, reveal) {
+    if (!reveal) return;
+    el.classList.add("is-timed-solution");
+    const panel = document.createElement("div");
+    panel.className = "hint-panel";
+    panel.innerHTML = `
+      <div class="hint-actions">
+        <button class="hint-admin" type="button">Открыть по паролю</button>
+        <span class="hint-timer" aria-live="polite"></span>
+      </div>
+      <form class="solution-password" hidden>
+        <input type="password" autocomplete="off" aria-label="Пароль преподавателя" placeholder="Пароль преподавателя" />
+        <button type="submit">Открыть</button>
+      </form>
+      <div class="hint-content" hidden><strong>${escapeHtml(reveal.label)}</strong>${renderMarkdown(reveal.content)}</div>`;
+    el.appendChild(panel);
+    const admin = panel.querySelector(".hint-admin");
+    const timer = panel.querySelector(".hint-timer");
+    const form = panel.querySelector(".solution-password");
+    const input = form.querySelector("input");
+    const content = panel.querySelector(".hint-content");
+    const manualKey = `practice-open:${data.slug}:${reveal.taskId}:${reveal.minutes}`;
+    let openedByPassword = sessionStorage.getItem(manualKey) === "1";
+    let passwordError = false;
+    admin.addEventListener("click", () => {
+      form.hidden = !form.hidden;
+      if (!form.hidden) input.focus();
+    });
+    input.addEventListener("input", () => {
+      passwordError = false;
+      updatePracticeTimer();
+    });
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (input.value === teacherPassword) {
+        openedByPassword = true;
+        sessionStorage.setItem(manualKey, "1");
+        updatePracticeTimer();
+      } else {
+        input.value = "";
+        passwordError = true;
+        updatePracticeTimer();
+        input.focus();
+      }
+    });
+    timerViews.push(() => {
+      const started = taskStartedAt(reveal.taskId);
+      const remaining = started ? Math.max(0, Math.ceil((started + reveal.minutes * 60000 - Date.now()) / 1000)) : null;
+      const opened = openedByPassword || remaining === 0;
+      content.hidden = !opened;
+      admin.hidden = opened;
+      if (opened) {
+        form.hidden = true;
+        timer.textContent = `${reveal.label} открыто`;
+      } else if (passwordError) timer.textContent = "Неверный пароль";
+      else if (remaining === null) timer.textContent = "Сначала запустите таймер на условии задачи";
+      else timer.textContent = `Откроется через ${Math.floor(remaining / 60)}:${String(remaining % 60).padStart(2, "0")}`;
+    });
+    updatePracticeTimer();
   }
 
   function attachCommandCheck(el, checks) {
@@ -446,6 +551,8 @@
     el.innerHTML = brand + inner;
     attachCommandCheck(el, s.commandChecks);
     attachSolution(el, s.solution);
+    if (s.timerTaskId) attachTaskTimer(el, s.timerTaskId);
+    attachTimedReveal(el, s.timedReveal);
 
     if (s.type === "title" && data.photo) {
       const img = document.createElement("img");
@@ -458,6 +565,7 @@
   }
 
   slides.forEach((s, i) => deckEl.appendChild(renderSlide(s, i)));
+  if (timerViews.length) setInterval(updatePracticeTimer, 1000);
 
   const chrome = document.createElement("div");
   chrome.className = "chrome";
