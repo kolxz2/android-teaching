@@ -162,6 +162,16 @@ window.COURSE = {
       "block": "Язык",
       "href": "practice/kotlin-02/index.html",
       "goal": "Сначала Kotlin Koans, затем задачи из лекции и LeetCode: подсказки через 5 минут, решения через 20 минут."
+    },
+    {
+      "id": "kotlin-03",
+      "kind": "practice",
+      "afterLecture": "03",
+      "slug": "kotlin-03-practice",
+      "title": "Практика 03: Kotlin ООП и первый Android-проект",
+      "block": "Язык",
+      "href": "practice/kotlin-03/index.html",
+      "goal": "Классы, инкапсуляция, data class, интерфейсы и композиция в Kotlin Playground; затем разбор классов пустого Android-проекта."
     }
   ]
 };
