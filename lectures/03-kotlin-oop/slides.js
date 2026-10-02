@@ -1,99 +1,64 @@
-const content = (title, body, notes = "") => ({ type: "content", title, body, notes });
-const section = (title, subtitle, outcome) => ({ type: "section", title, subtitle, outcome });
-const practice = (title, body, solution) => ({ type: "practice", title, badge: "Практика", body, solution });
-
 window.DECK = {
-  course: "Android-разработка",
-  lecture: 3,
-  lectureId: "03",
-  slug: "03-kotlin-oop",
-  title: "Kotlin: ООП и функциональная обработка данных",
-  block: "Язык",
-  teacher: "Сучёв Николай Евгеньевич",
-  teacherMeta: "Android-разработчик · Т-Банк · команда Вовлечение",
-  hub: "../../index.html",
-  photo: "../../assets/teacher.jpg",
-  slides: [
-    { type: "title", title: "Android-разработка", subtitle: "Лекция 3. Kotlin: ООП и функциональная обработка данных", kicker: "03 / 15", body: "- 73 слайда · 90 минут\n- Моделируем данные и защищаем правила\n- Сравниваем вложенный и inner-класс\n- Читаем простые лямбды и порядок инициализации" },
-    content("Результат занятия", "- Создавать классы, объекты, свойства и методы\n- Ограничивать изменение состояния\n- Различать наследование, интерфейс и композицию\n- Выбирать между вложенным и `inner`-классом\n- Читать простые лямбды и порядок инициализации"),
-    { type: "content", title: "Маршрут лекции", layout: "roadmap", body: "1. Класс и объект\n2. Состояние и связи\n3. Nested и inner\n4. Специальные классы\n5. Лямбды и инициализация" },
-    content("Связь с коллекциями", "```kotlin\nval amounts = listOf(500L, 1200L, 300L)\n```\nПока список хранит только числа. Класс позволит каждой операции хранить сумму, тип и комментарий вместе."),
-
-    section("Классы и объекты", "Класс описывает данные и доступные операции", "Студент создаёт класс, экземпляр, свойства и методы."),
-    content("Класс и экземпляр", "```kotlin\nclass User(val name: String)\n\nval first = User(\"Аня\")\nval second = User(\"Борис\")\n```\nКласс описывает форму объектов. Вызов `User(...)` создаёт экземпляр. [Классы](https://kotlinlang.org/docs/classes.html)"),
-    content("Основной конструктор", "```kotlin\nclass Account(\n    val id: Long,\n    val owner: String,\n    var balance: Long\n)\n```\nПараметр с `val` или `var` сразу становится свойством."),
-    content("Параметр или свойство", "```kotlin\nclass User(name: String) {\n    val displayName = name.trim()\n}\n```\nПараметр без `val` или `var` участвует в инициализации, но внешний код не получает одноимённое свойство."),
-    content("init-блок", "```kotlin\nclass Account(val id: Long, balance: Long) {\n    var balance: Long = balance\n        private set\n\n    init { require(balance >= 0) }\n}\n```\n`init` выполняется при создании объекта."),
-    content("Порядок инициализации", "```kotlin\nclass Demo(name: String) {\n    val normalized = name.trim()\n    init { println(normalized) }\n    val length = normalized.length\n}\n```\nИнициализаторы свойств и `init` выполняются сверху вниз."),
-    content("Методы", "```kotlin\nclass Account(var balance: Long) {\n    fun deposit(amount: Long) {\n        require(amount > 0)\n        balance += amount\n    }\n}\n```\nМетод работает с состоянием конкретного объекта."),
-    content("Геттер и сеттер", "```kotlin\nclass Person(name: String) {\n    var name: String = name\n        set(value) { field = value.trim() }\n\n    val initials: Char\n        get() = name.first()\n}\n```\n`field` обращается к хранилищу свойства."),
-    content("Модификаторы видимости", "| Модификатор | Доступ |\n| `public` | отовсюду |\n| `internal` | внутри модуля |\n| `protected` | класс и наследники |\n| `private` | текущая область или класс |\n\nБез модификатора Kotlin использует `public`."),
-    content("this", "```kotlin\nclass User(name: String) {\n    val name: String\n\n    init { this.name = name.trim() }\n}\n```\n`this` указывает на текущий объект и помогает различить одноимённые значения."),
-    content("Вторичный конструктор", "```kotlin\nclass User(val name: String, val age: Int) {\n    constructor(name: String) : this(name, 0)\n}\n```\nВ Kotlin значения по умолчанию и фабричные функции часто проще вторичного конструктора."),
-
-    section("Инкапсуляция", "Состояние изменяется только через правила объекта", "Студент отличает ограничение доступа от полноценной инкапсуляции."),
-    { type: "content", layout: "statement", title: "Вопрос группе: private и инкапсуляция", body: "Поле объявили `private`. Получили ли мы инкапсуляцию автоматически?", notes: "Дать группе 30–60 секунд. Ответ на следующем слайде." },
-    content("private как механизм", "`private` ограничивает доступ. Инкапсуляция требует ещё и безопасных публичных операций, которые сохраняют правила объекта."),
-    content("Инкапсуляция счёта", "```kotlin\nclass Account(initialBalance: Long) {\n    var balance: Long = initialBalance\n        private set\n\n    init { require(initialBalance >= 0) }\n\n    fun deposit(amount: Long) {\n        require(amount > 0)\n        balance += amount\n    }\n}\n```"),
-    practice("Модель счёта", "Создайте `Account`: id и owner доступны для чтения, balance нельзя менять снаружи, отрицательный начальный баланс запрещён, deposit принимает только положительную сумму.", "Используйте свойства `val`, `private set`, проверку в `init` и `require` внутри `deposit`."),
-
-    section("Связи между типами", "Наследование, интерфейс и композиция решают разные задачи", "Студент выбирает подходящий способ связать типы."),
-    content("Четыре идеи ООП", "- Инкапсуляция защищает состояние и правила\n- Абстракция оставляет существенный контракт\n- Наследование создаёт отношение «является»\n- Полиморфизм позволяет работать через общий тип"),
-    content("Классы final по умолчанию", "```kotlin\nopen class Operation(val amount: Long)\nclass Income(amount: Long) : Operation(amount)\n```\n`open` явно разрешает наследование. [Наследование](https://kotlinlang.org/docs/inheritance.html)"),
-    content("Переопределение", "```kotlin\nopen class Operation {\n    open fun sign(): Int = 1\n}\nclass Expense : Operation() {\n    override fun sign(): Int = -1\n}\n```"),
-    content("Абстрактный класс", "```kotlin\nabstract class Operation(val amount: Long) {\n    abstract fun apply(balance: Long): Long\n}\nclass Income(amount: Long) : Operation(amount) {\n    override fun apply(balance: Long) = balance + amount\n}\n```"),
-    content("Интерфейс", "```kotlin\ninterface Printable {\n    fun format(): String\n}\nclass Receipt(val total: Long) : Printable {\n    override fun format() = \"Итого: $total\"\n}\n```\nИнтерфейс задаёт контракт. [Интерфейсы](https://kotlinlang.org/docs/interfaces.html)"),
-    content("Полиморфизм", "```kotlin\nfun printItem(item: Printable) {\n    println(item.format())\n}\nprintItem(Receipt(500))\n```\nФункция зависит от общего контракта, а объект выбирает реализацию."),
-    content("Композиция", "```kotlin\nclass Account(private val formatter: Printable) {\n    fun printSummary() = println(formatter.format())\n}\n```\nКомпозиция выражает отношение «использует» и позволяет заменить зависимость."),
-    content("Наследование или композиция", "| Связь | Инструмент |\n| Тип действительно является частным случаем другого | наследование |\n| Объект использует другой объект для работы | композиция |\n| Нескольким типам нужен общий контракт | интерфейс |"),
-
-    section("Ещё о классах", "Сравнение, проверка типа и классы внутри классов", "Студент различает обычный, вложенный и inner-класс и понимает, откуда появляется риск утечки памяти."),
-    content("Обычный class: сравниваются объекты", "```kotlin\nclass User(val name: String)\n\nval first = User(\"Анна\")\nval second = User(\"Анна\")\nval same = first\n\nprintln(first == second) // false\nprintln(first == same)   // true\n```\n`==` вызывает `equals()`. Обычный класс не сравнивает свойства автоматически: без переопределения `equals()` равны только ссылки на один объект. Позже увидим, что `data class` сравнивает данные."),
-    content("Проверка is и smart cast", "```kotlin\nopen class Animal\n\nclass Cat : Animal() {\n    fun meow() = println(\"Мяу\")\n}\n\nfun react(animal: Animal) {\n    if (animal is Cat) {\n        animal.meow()\n    }\n}\n```\n`is` проверяет реальный тип объекта. Внутри блока Kotlin уже знает, что `animal` — это `Cat`, поэтому отдельное приведение типа не нужно. Это называется smart cast."),
-    content("class внутри class: вложенный класс", "```kotlin\nclass House(val address: String) {\n    class Room(val number: Int)\n}\n\nval room = House.Room(5)\n```\nОбычный `class Room` внутри `House` — вложенный класс. Он нужен для логической группировки имён, но не связан с конкретным домом. Поэтому `Room` создаётся через `House.Room(...)` и не видит `address`."),
-    content("inner class: связан с внешним объектом", "```kotlin\nclass House(val address: String) {\n    inner class Room(val number: Int) {\n        fun label() = \"$address, комната $number\"\n    }\n}\n\nval house = House(\"Ленина, 10\")\nval room = house.Room(5)\nprintln(room.label())\n```\nСлово `inner` добавляет связь с конкретным `house`. Поэтому комната видит `address` и создаётся только через экземпляр: `house.Room(...)`."),
-    content("Вложенный или inner", "| Вопрос | `class Room` | `inner class Room` |\n| Нужен объект `House` для создания | нет | да |\n| Видит `address` внешнего объекта | нет | да |\n| Хранит ссылку на внешний объект | нет | да |\n| Создание | `House.Room()` | `house.Room()` |\n\nИспользуйте обычный вложенный класс по умолчанию. Добавляйте `inner`, только если действительно нужен доступ к данным конкретного внешнего объекта."),
-    content("Как inner может удержать экран в памяти", "```kotlin\nobject GlobalStorage {\n    var listener: Any? = null\n}\n\nclass Screen {\n    inner class Listener\n}\n\nfun openScreen() {\n    val screen = Screen()\n    GlobalStorage.listener = screen.Listener()\n}\n```\nПосле завершения `openScreen()` хранилище удерживает `Listener`, а тот — скрытую ссылку на `Screen`. Экран не удаляется сборщиком мусора: это утечка памяти. Если доступ к экрану не нужен — используйте вложенный класс. Если нужен — не храните `inner`-объект дольше экрана и вовремя очищайте ссылку."),
-
-    section("Специальные классы Kotlin", "Тип сообщает не только структуру, но и правила данных", "Студент выбирает data class, enum, sealed, object и value class по роли объекта."),
-    content("Одна предметная область — разные роли", "В приложении встречаются сущности с разными ролями:\n\n- операция — значение, которое нужно сравнивать и копировать;\n- тип операции — один вариант из фиксированного набора;\n- результат действия — один из вариантов с разными данными;\n- общий сервис — один экземпляр для всех;\n- идентификатор — число, которому нужен отдельный тип.\n\nKotlin даёт отдельный инструмент для каждой роли."),
-    content("data class: объект-значение", "```kotlin\ndata class Transaction(\n    val id: Long,\n    val amount: Long,\n    val type: TransactionType,\n    val comment: String? = null\n)\n\nval coffee = Transaction(1, 350, TransactionType.EXPENSE, \"Кофе\")\n```\n`data class` удобен, когда смысл объекта определяется его данными."),
-    content("Что генерирует data class", "Для свойств основного конструктора компилятор создаёт:\n\n- `equals()` и `hashCode()` — сравнение и работа в `Set`/`Map`;\n- `toString()` — читаемый вывод;\n- `copy()` — изменённую копию;\n- `componentN()` — деструктуризацию.\n\nНужные методы появляются при компиляции."),
-    content("Практика: сравнение по данным", "```kotlin\nval fromCache = Transaction(1, 350, TransactionType.EXPENSE, \"Кофе\")\nval fromServer = Transaction(1, 350, TransactionType.EXPENSE, \"Кофе\")\n\nprintln(fromCache == fromServer)  // true\nprintln(fromCache === fromServer) // false\n```\n`==` вызывает `equals()` и сравнивает значения. `===` проверяет, один ли это объект в памяти."),
-    content("copy: новое состояние", "```kotlin\nval draft = Transaction(1, 350, TransactionType.EXPENSE)\nval saved = draft.copy(comment = \"Кофе\")\n\nprintln(draft.comment) // null\nprintln(saved.comment) // Кофе\n```\n`copy()` не меняет исходный объект. Старое состояние остаётся доступным, новое содержит только выбранное изменение."),
-    content("Важно: copy не делает глубокую копию", "```kotlin\ndata class Report(val tags: MutableList<String>)\n\nval first = Report(mutableListOf(\"food\"))\nval second = first.copy()\nsecond.tags += \"daily\"\n\nprintln(first.tags) // [food, daily]\n```\nСкопирован `Report`, но оба объекта ссылаются на один список. В data-классах безопаснее хранить неизменяемые коллекции."),
-    content("enum class: фиксированный набор", "```kotlin\nenum class TransactionType {\n    INCOME, EXPENSE\n}\n\nfun sign(type: TransactionType) = when (type) {\n    TransactionType.INCOME -> 1\n    TransactionType.EXPENSE -> -1\n}\n```\nНельзя создать третий вариант снаружи. Компилятор знает весь набор и проверяет исчерпывающий `when`."),
-    content("Enum хранит данные и поведение", "```kotlin\nenum class TransactionType(val sign: Int) {\n    INCOME(+1),\n    EXPENSE(-1);\n\n    fun apply(amount: Long): Long = amount * sign\n}\n\nval delta = TransactionType.EXPENSE.apply(350)\n// -350\n```\nКаждый элемент enum — готовый объект. Общее правило можно держать рядом с вариантом."),
-    content("sealed: варианты с разными данными", "```kotlin\nsealed interface SaveResult {\n    data class Success(val id: Long) : SaveResult\n    data class ValidationError(val field: String) : SaveResult\n    data class NetworkError(val code: Int) : SaveResult\n}\n```\nУ enum варианты устроены одинаково. У sealed-типа каждый вариант может иметь собственные свойства."),
-    content("Практика: результат нельзя обработать наполовину", "```kotlin\nfun message(result: SaveResult): String = when (result) {\n    is SaveResult.Success -> \"Сохранено: ${result.id}\"\n    is SaveResult.ValidationError ->\n        \"Проверьте поле ${result.field}\"\n    is SaveResult.NetworkError ->\n        \"Ошибка сети ${result.code}\"\n}\n```\nЕсли добавить новый вариант, компилятор подсветит этот `when` и другие места, которые нужно обновить."),
-    content("Сначала вспомним обычный class", "```kotlin\nclass Lamp(val room: String) {\n    fun turnOn() {\n        println(\"Свет включён: $room\")\n    }\n}\n\nval kitchenLamp = Lamp(\"Кухня\")\nval bedroomLamp = Lamp(\"Спальня\")\n```\nУ каждой комнаты своя лампа, поэтому мы создаём два независимых объекта. У них один класс, но разные значения `room`."),
-    content("object: один общий объект", "```kotlin\nobject SchoolBell {\n    fun ring() {\n        println(\"Звонок на урок!\")\n    }\n}\n\nSchoolBell.ring()\n```\nВ школе нужен один общий звонок, а не новый звонок для каждого ученика. Поэтому не пишем `SchoolBell()`: Kotlin сам создаёт единственный объект, и все обращаются к нему по имени."),
-    content("companion object: общее для класса", "```kotlin\nclass Bicycle(val color: String) {\n    companion object {\n        const val WHEELS = 2\n    }\n}\n\nval redBike = Bicycle(\"Красный\")\n\nprintln(redBike.color) // свойство велосипеда\nprintln(Bicycle.WHEELS) // общее для класса\n```\n`color` принадлежит конкретному велосипеду. Количество колёс относится к понятию «велосипед» целиком, поэтому обращаемся через имя класса: `Bicycle.WHEELS`."),
-    content("value class: отдельный тип для одного значения", "```kotlin\n@JvmInline\nvalue class TransactionId(val value: Long)\n\ndata class Transaction(\n    val id: TransactionId,\n    val amount: Long\n)\n\nfun load(id: TransactionId) { /* ... */ }\n```\n`TransactionId` нельзя случайно перепутать с суммой типа `Long`. На JVM обёртка во многих случаях не создаёт отдельный объект."),
-    content("Что выбрать", "| Если нужно... | Используем |\n| Значение со сравнением и копированием | `data class` |\n| Простые известные константы | `enum class` |\n| Варианты с разными данными | `sealed class/interface` |\n| Один общий экземпляр | `object` |\n| Сильный тип поверх одного значения | `value class` |\n\nНачинаем с вопроса: какую невозможную ситуацию должен исключить тип?"),
-    content("Собираем модель: типы полей", "```kotlin\n@JvmInline\nvalue class TransactionId(\n    val value: Long\n)\n\nenum class TransactionType(val sign: Int) {\n    INCOME(+1),\n    EXPENSE(-1)\n}\n```\n`TransactionId` не даёт перепутать идентификатор с суммой. `TransactionType` ограничивает набор вариантов и хранит знак операции."),
-    content("Собираем модель: операция", "```kotlin\ndata class Transaction(\n    val id: TransactionId,\n    val amount: Long,\n    val type: TransactionType,\n    val comment: String? = null\n)\n```\n`Transaction` собирает подготовленные типы в объект-значение. `copy()` меняет выбранное поле, а сравнение учитывает все свойства основного конструктора."),
-    content("Собираем модель: результат действия", "```kotlin\nsealed interface AddResult {\n    data class Success(\n        val item: Transaction\n    ) : AddResult\n\n    data object InvalidAmount : AddResult\n}\n```\n`Success` несёт созданную операцию. `InvalidAmount` не нужны дополнительные данные, поэтому достаточно `data object`. `when` потребует обработать оба исхода."),
-
-    section("Лямбды: только основа", "Короткая запись действия для готовой операции", "Студент понимает, зачем нужны фигурные скобки и как читать `filter`, `map` и обработчик нажатия."),
-    content("Зачем нужны лямбды", "Некоторые функции уже умеют обходить список или ждать нажатие. Им нужно сообщить только маленькое действие:\n\n- `filter` — какой элемент оставить;\n- `map` — во что превратить элемент;\n- `setOnClickListener` — что сделать при нажатии.\n\nЛямбда позволяет записать это действие прямо в месте вызова."),
-    content("Как читать лямбду", "```kotlin\nval expenses = transactions.filter { item ->\n    item.type == TransactionType.EXPENSE\n}\n```\nЧитаем так: «для каждого `item` проверить его тип». Выражение после стрелки возвращает `true` или `false`. `filter` оставляет только элементы с результатом `true`."),
-    content("Короткая запись с it", "```kotlin\nval large = transactions.filter {\n    it.amount > 10_000\n}\n```\nЕсли параметр один, Kotlin разрешает не писать имя и стрелку. `it` — текущая операция. Явное имя `item` лучше, когда условие длинное."),
-    content("Практика: filter по шагам", "Исходные данные: кофе 350 ₽, зарплата 80 000 ₽, аренда 35 000 ₽.\n\nУсловие: `it.type == EXPENSE`.\n\n1. Кофе → `true` → остаётся.\n2. Зарплата → `false` → удаляется.\n3. Аренда → `true` → остаётся.\n\nРезультат: новый список из кофе и аренды. Исходный список не изменился."),
-    content("Практика: map меняет представление", "```kotlin\nval labels = transactions.map { item ->\n    \"${item.comment}: ${item.amount} ₽\"\n}\n```\n`map` не отбирает элементы. Для каждой операции он создаёт новое значение — строку. Был `List<Transaction>`, стал `List<String>`."),
-    content("Практика Android: нажатие", "```kotlin\nbinding.saveButton.setOnClickListener {\n    viewModel.save()\n}\n```\nКод внутри фигурных скобок не выполняется при настройке кнопки. Android запомнит его и вызовет после нажатия. На этом этапе достаточно узнавать такую запись и понимать, кто запускает код."),
-    content("Главная мысль о лямбдах", "Лямбда — это короткий блок кода, который мы передаём готовой операции.\n\n- В `filter` его вызывает Kotlin для каждого элемента.\n- В `map` его вызывает Kotlin для каждого элемента.\n- В обработчике кнопки его позже вызывает Android.\n\nПока не нужно писать собственные функции, принимающие функции: достаточно уверенно читать эти три случая."),
-
-    section("Порядок инициализации", "Что выполняется при создании наследника", "Студент восстанавливает порядок companion object, свойств, init-блоков и тел конструкторов."),
-    content("Базовый класс", "```kotlin\nopen class Base {\n    companion object {\n        init { println(\"1. Base companion\") }\n    }\n\n    private val baseProperty =\n        mark(\"3. Base property\")\n\n    init { println(\"4. Base init\") }\n\n    constructor() {\n        println(\"5. Base constructor\")\n    }\n}\n```\nВ примере `mark()` печатает переданную строку и возвращает её. Свойство и `init` выполняются в порядке записи, до тела вторичного конструктора."),
-    content("Класс-наследник", "```kotlin\nclass Child : Base {\n    companion object {\n        init { println(\"2. Child companion\") }\n    }\n\n    private val childProperty =\n        mark(\"6. Child property\")\n\n    init { println(\"7. Child init\") }\n\n    constructor() : super() {\n        println(\"8. Child constructor\")\n    }\n}\n\nfun main() { Child() }\n```\nСначала полностью создаётся базовая часть объекта, только затем начинается инициализация части `Child`."),
-    content("Фактический порядок", "```text\n1. Base companion\n2. Child companion\n3. Base property\n4. Base init\n5. Base constructor\n6. Child property\n7. Child init\n8. Child constructor\n```\nCompanion-объекты инициализируются один раз при первом использовании классов: сначала у базового класса, затем у наследника. Для каждого экземпляра дальше выполняются свойства и `init` базового класса, тело его конструктора, затем те же этапы наследника."),
-
-    section("Вопросы", "Проверяем понимание по ходу выполнения кода", "Студент объясняет выбор типа и момент вызова функции своими словами."),
-    content("Вложенные классы: вопросы", "1. Почему два обычных `User(\"Анна\")` не равны автоматически?\n2. Что Kotlin узнаёт после проверки `animal is Cat`?\n3. Как создать `House.Room`, если `Room` — обычный вложенный класс?\n4. Почему `inner Room` видит `address` конкретного дома?\n5. Какую скрытую ссылку хранит `inner`-объект?\n6. Какая цепочка ссылок не позволяет удалить `Screen` из памяти?"),
-    content("Специальные классы: вопросы", "1. Почему две одинаковые операции `data class` равны через `==`, но не через `===`?\n2. Почему `copy()` с `MutableList` не создаёт независимую копию?\n3. Когда `enum` лучше sealed-интерфейса?\n4. Что произойдёт с `when`, если в sealed-тип добавить вариант?\n5. Почему школьный звонок удобно объявить как `object`?\n6. Почему к `WHEELS` обращаемся через `Bicycle`, а к `color` — через конкретный объект?"),
-    content("Лямбды: вопросы", "1. Какое условие должен вернуть `filter`, чтобы оставить элемент?\n2. Что обозначают `item` и `it` внутри лямбды?\n3. Чем результат `map` отличается от результата `filter`?\n4. Изменяет ли `filter` исходный список?\n5. Когда выполнится код внутри `setOnClickListener`?"),
-    content("Прочитайте код", "```kotlin\nval expenses = transactions.filter { item ->\n    item.type == TransactionType.EXPENSE\n}\n\nval labels = expenses.map { item ->\n    \"${item.comment}: ${item.amount} ₽\"\n}\n```\nОбъясните по шагам:\n\n1. какой тип у `expenses` и `labels`;\n2. почему зарплата не попадёт в `expenses`;\n3. сколько раз вызывается условие `filter`;\n4. изменился ли список `transactions`."),
-    content("Объясните порядок и выбор", "1. Модель ответа сервера имеет состояния `Loading`, `Content(data)` и `Error(message)`. Какой тип выбрать?\n2. Почему для двух ламп нужен `class`, а для одного школьного звонка подходит `object`?\n3. Чем свойство объекта отличается от значения в `companion object`?\n4. Что выполнится раньше: `Base init` или `Child property`?\n5. В каком порядке выполняются свойства, `init` и тело конструктора одного класса?")
+  "course": "Android-разработка",
+  "lecture": 3,
+  "lectureId": "03",
+  "slug": "03-kotlin-oop",
+  "title": "Kotlin: ООП и функциональная обработка данных",
+  "block": "Язык",
+  "teacher": "Сучёв Николай Евгеньевич",
+  "teacherMeta": "Android-разработчик · Т-Банк · команда Вовлечение",
+  "hub": "../../index.html",
+  "photo": "../../assets/teacher.jpg",
+  "slides": [
+    {
+      "type": "title",
+      "title": "Android-разработка",
+      "subtitle": "Лекция 3. Kotlin: ООП и функциональная обработка данных",
+      "body": "- Курс из 15 лекций · пара 1,5 часа\n- Блок: **Язык**\n- Ветка: `lecture-03`\n- Преподаватель: Сучёв Николай Евгеньевич",
+      "kicker": "03 / 15"
+    },
+    {
+      "type": "content",
+      "title": "Что вы умеете к концу пары",
+      "body": "- Моделировать данные классами и обрабатывать коллекции объектов с помощью лямбд.\n- Класс, свойства, конструкторы, init\n- Видимость, this\n- Наследование, open, override"
+    },
+    {
+      "type": "section",
+      "title": "Теория",
+      "subtitle": "Kotlin: ООП и функциональная обработка данных"
+    },
+    {
+      "type": "content",
+      "title": "План теории",
+      "body": "- Класс, свойства, конструкторы, init\n- Видимость, this\n- Наследование, open, override\n- Абстрактные классы и интерфейсы\n- Принципы ООП: инкапсуляция, наследование, полиморфизм, абстракция\n- Data-классы\n- enum, sealed class / sealed interface\n- object (синглтон), companion object, анонимные объекты\n- Лямбды, функции высшего порядка и цепочки обработки коллекций\n- Ссылки на функции, fold и Sequence"
+    },
+    {
+      "type": "section",
+      "title": "Практика",
+      "subtitle": "На паре, руками",
+      "badge": "Практика"
+    },
+    {
+      "type": "content",
+      "title": "Практика на паре",
+      "badge": "Практика",
+      "body": "- Модель предметной области курса (Transaction, User, статусы через enum / sealed)\n- Реализация TransactionRepository и фильтрация операций"
+    },
+    {
+      "type": "content",
+      "title": "Домашнее задание",
+      "badge": "Домашнее задание",
+      "body": "- Пройти раздел Classes на Kotlin Playground\n- Доменная модель: Transaction, Category, TransactionType, TransactionRepository\n- PR lecture-03 в FinanceApp\n\nДедлайн: **7 дней**. Ветка `lecture-03`, PR в `main`."
+    },
+    {
+      "type": "content",
+      "title": "Что дальше",
+      "body": "- Лекция 4 — Ошибки, паттерны и первое приложение на Compose\n- Git-процесс тот же: ветка → commit → push → PR."
+    },
+    {
+      "type": "section",
+      "title": "Вопросы",
+      "subtitle": "Сучёв Николай Евгеньевич · Т-Банк, команда Вовлечение"
+    }
   ]
 };

@@ -65,16 +65,16 @@ const lectureTasks = [
     )
   },
   {
-    name: "Список оценок",
+    name: "Список цен",
     body: md(
-      "Создайте список оценок `5, 4, 3, 5`. Напишите функцию `printGrades(grades: List<Int>)`, которая печатает количество оценок, первую оценку и затем каждую оценку с новой строки. Для пустого списка вместо первой оценки напечатайте `Нет оценок`.",
+      "Создайте список цен `5, 4, 3, 5`. Напишите функцию `printPrices(prices: List<Int>)`, которая печатает количество цен, первую цену и затем каждую цену с новой строки. Для пустого списка вместо первой цены напечатайте `Нет цен`.",
       "",
       "Для списка из условия первые две строки вывода: `4` и `5`.",
       "",
       testBlock([
         { input: `listOf(5, 4, 3, 5)`, output: `4; 5; 5, 4, 3, 5` },
         { input: `listOf(2)`, output: `1; 2; 2` },
-        { input: `emptyList<Int>()`, output: `0; Нет оценок; пустой цикл` },
+        { input: `emptyList<Int>()`, output: `0; Нет цен; пустой цикл` },
         { input: `listOf(3, 3, 4)`, output: `3; 3; 3, 3, 4` },
         { input: `listOf(1, 2, 3, 4, 5)`, output: `5; 1; 1, 2, 3, 4, 5` }
       ])
@@ -82,10 +82,10 @@ const lectureTasks = [
     hint: "Используйте `size`, `firstOrNull()` и обычный цикл `for`. Пустой список обработайте через `?:`.",
     solution: md(
       "```kotlin",
-      "fun printGrades(grades: List<Int>) {",
-      "    println(grades.size)",
-      "    println(grades.firstOrNull() ?: \"Нет оценок\")",
-      "    for (grade in grades) println(grade)",
+      "fun printPrices(prices: List<Int>) {",
+      "    println(prices.size)",
+      "    println(prices.firstOrNull() ?: \"Нет цен\")",
+      "    for (price in prices) println(price)",
       "}",
       "",
       "printGrades(listOf(5, 4, 3, 5))",
@@ -93,27 +93,27 @@ const lectureTasks = [
     )
   },
   {
-    name: "Обработка оценок",
+    name: "Обработка цен",
     body: md(
-      "Напишите функцию `passedGrades(grades: List<Int>): List<String>`. Оставьте оценки не ниже 3, отсортируйте их по убыванию и превратите каждую в строку вида `Оценка: 5`.",
+      "Напишите функцию `filteredPrices(prices: List<Int>): List<String>`. Оставьте цены не ниже 3, отсортируйте их по убыванию и превратите каждую в строку вида `Цена: 5`.",
       "",
-      "Пример: `[5, 2, 4, 3, 5]` → `[Оценка: 5, Оценка: 5, Оценка: 4, Оценка: 3]`.",
+      "Пример: `[5, 2, 4, 3, 5]` → `[Цена: 5, Цена: 5, Цена: 4, Цена: 3]`.",
       "",
       testBlock([
-        { input: `[5, 2, 4, 3, 5]`, output: `[Оценка: 5, Оценка: 5, Оценка: 4, Оценка: 3]` },
+        { input: `[5, 2, 4, 3, 5]`, output: `[Цена: 5, Цена: 5, Цена: 4, Цена: 3]` },
         { input: `[2, 1]`, output: `[]` },
-        { input: `[3]`, output: `[Оценка: 3]` },
-        { input: `[4, 5, 2]`, output: `[Оценка: 5, Оценка: 4]` },
+        { input: `[3]`, output: `[Цена: 3]` },
+        { input: `[4, 5, 2]`, output: `[Цена: 5, Цена: 4]` },
         { input: `[]`, output: `[]` }
       ])
     ),
     hint: "Соберите цепочку из `filter`, `sortedDescending` и `map`. Исходный список менять не нужно.",
     solution: md(
       "```kotlin",
-      "fun passedGrades(grades: List<Int>): List<String> = grades",
+      "fun filteredPrices(prices: List<Int>): List<String> = prices",
       "    .filter { it >= 3 }",
       "    .sortedDescending()",
-      "    .map { \"Оценка: $it\" }",
+      "    .map { \"Цена: $it\" }",
       "```"
     )
   }
@@ -310,7 +310,7 @@ window.DECK = {
       type: "section",
       title: "Из лекции 02",
       subtitle: "Условия, функции, null safety и коллекции",
-      body: "- Приветствие без null\n- FizzBuzz\n- Список оценок\n- Обработка оценок"
+      body: "- Приветствие без null\n- FizzBuzz\n- Список цен\n- Обработка цен"
     },
     ...slidesFor(lectureTasks, 0, "Из лекции"),
     {
@@ -328,3 +328,4 @@ window.DECK = {
     }
   ]
 };
+

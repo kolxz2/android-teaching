@@ -14,7 +14,7 @@ window.DECK = {
       "type": "title",
       "title": "Android-разработка",
       "subtitle": "Лекция 11. Coroutines и Flow",
-      "body": "- Курс из 15 лекций · пара 1,5 часа\n- Блок: **Компоненты и сеть**\n- Ветка: `lecture-11` · 7 баллов\n- Преподаватель: Сучёв Николай Евгеньевич",
+      "body": "- Курс из 15 лекций · пара 1,5 часа\n- Блок: **Компоненты и сеть**\n- Ветка: `lecture-11`\n- Преподаватель: Сучёв Николай Евгеньевич",
       "kicker": "11 / 15"
     },
     {
@@ -30,7 +30,7 @@ window.DECK = {
     {
       "type": "content",
       "title": "План теории",
-      "body": "- Зачем корутины, чем отличаются от потоков\n- CoroutineScope, Job, Dispatchers\n- Builders: launch, async / await, runBlocking (только для понимания)\n- Отмена (cancellation)\n- suspend-функции в Retrofit\n- Flow: холодный поток, collect\n- Операторы: map, filter, catch, onEach\n- Связка с UI: lifecycleScope / repeatOnLifecycle (обзор)"
+      "body": "- Зачем корутины, чем отличаются от потоков\n- CoroutineScope, Job, Dispatchers\n- Builders: launch, async / await, runBlocking (только для понимания)\n- Отмена (cancellation)\n- suspend-функции в Retrofit\n- Flow: холодный поток, collect\n- Операторы: map, filter, catch, onEach\n- Связка с Compose UI: collectAsStateWithLifecycle"
     },
     {
       "type": "section",

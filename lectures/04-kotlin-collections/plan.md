@@ -1,42 +1,35 @@
-# Лекция 04. Ошибки, паттерны и первое Android-приложение
+# Лекция 04. Ошибки, паттерны и первое приложение на Jetpack Compose
 
-**Блок:** Переход от языка к Android  
-**Длительность:** 90 минут  
-**Объём:** 59 слайдов  
-**Ветка / PR:** `lecture-04`
+**Блок:** Переход к Android  
+**Длительность:** пара 90 мин (теория + живая практика)  
+**Ветка / PR:** `lecture-04`  
 
 ## Цель
 
-Научиться организовывать Kotlin-код с помощью небольших функций, композиции и простых паттернов, а затем применить эти приёмы в первом Android-экране.
+Организовать Kotlin-код с помощью небольших функций и паттернов, затем собрать первый экран FinanceApp на Jetpack Compose.
 
-## Содержание
+## Теория
 
-- Kotlin-идиомы: неизменяемые данные, guard clauses, extension- и scope-функции
-- Валидация, исключения и sealed-результаты
-- Практические паттерны: Strategy, Factory, Repository, State
-- Разделение UI и бизнес-логики
-- Первое Android-приложение: модуль `app`, manifest, Activity, XML и обработка нажатия
-- Однонаправленное обновление состояния экрана
+- Kotlin-идиомы: guard clauses, expression body, extension- и scope-функции
+- Контракты, исключения и sealed-результаты
+- Практические паттерны: Factory, Repository, State
+- Разделение UI и бизнес-логики: однонаправленный поток данных (UDF)
+- Мост к Android: модуль app, AndroidManifest.xml, ComponentActivity и setContent
+- Composable-функции, Modifier, Material 3 и обработка событий через лямбды
 
-## Границы темы
+## Практика на паре
 
-- Жизненный цикл и Context — лекция 5
-- Полная XML-вёрстка — лекция 6
-- RecyclerView — лекция 7
-- MVVM, Clean Architecture и SOLID — лекция 13
-- GoF-паттерны и Dependency Injection — лекция 14
+- Реализация reduce(state, event) и MainUiState
+- Создание composable-экрана в MainActivity через setContent
+- Обновление интерфейса из MainUiState и обработка нажатия
 
-## Практика
+## Домашнее задание
 
-Студенты переносят модель операций из лекции 2 в Android-приложение. Кнопка создаёт демонстрационную операцию, обычный Kotlin-код рассчитывает новое состояние, Activity отображает результат.
+- Запуск и изменение стартового FinanceApp
+- Смена текста / состояния по нажатию кнопки
+- Вынос пользовательских строк в ресурсы и использование stringResource
+- PR lecture-04
 
-## Официальные источники
+## Дальше
 
-- [Kotlin idioms](https://kotlinlang.org/docs/idioms.html)
-- [Extensions](https://kotlinlang.org/docs/extensions.html)
-- [Higher-order functions and lambdas](https://kotlinlang.org/docs/lambdas.html)
-- [Scope functions](https://kotlinlang.org/docs/scope-functions.html)
-- [Exceptions](https://kotlinlang.org/docs/exceptions.html)
-- [Android app architecture](https://developer.android.com/topic/architecture)
-- [Architecture recommendations](https://developer.android.com/topic/architecture/recommendations)
-- [Activities](https://developer.android.com/guide/components/activities/intro-activities)
+Лекция 5 — Activity, состояние и жизненный цикл Compose

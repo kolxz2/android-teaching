@@ -4,7 +4,7 @@ window.COURSE = {
   "teacher": "Сучёв Николай Евгеньевич",
   "teacherMeta": "Android-разработчик · Т-Банк · команда Вовлечение",
   "photo": "assets/teacher.jpg",
-  "subtitle": "15 занятий · пара 1,5 часа · сквозной проект",
+  "subtitle": "15 лекций · пара 1,5 часа · сквозной проект",
   "lectures": [
     {
       "id": "01",
@@ -12,7 +12,6 @@ window.COURSE = {
       "title": "Введение в Android. Инструменты. Git и GitHub",
       "block": "Старт и инструменты",
       "href": "lectures/01-vvedenie/index.html",
-      "points": "4",
       "goal": "Студент ставит окружение, понимает, что такое Android-приложение, и умеет сохранить работу в Git/GitHub."
     },
     {
@@ -21,8 +20,7 @@ window.COURSE = {
       "title": "Kotlin: основы языка и коллекции",
       "block": "Язык",
       "href": "lectures/02-kotlin-osnovy/index.html",
-      "points": "",
-      "goal": "Писать Kotlin-код без Android: синтаксис, null safety, функции и основные операции с коллекциями."
+      "goal": "Писать простые программы на Kotlin без Android и обрабатывать наборы данных через коллекции."
     },
     {
       "id": "03",
@@ -30,53 +28,47 @@ window.COURSE = {
       "title": "Kotlin: ООП и функциональная обработка данных",
       "block": "Язык",
       "href": "lectures/03-kotlin-oop/index.html",
-      "points": "6",
-      "goal": "Моделировать предметную область классами и обрабатывать коллекции объектов с помощью лямбд."
+      "goal": "Моделировать данные классами и обрабатывать коллекции объектов с помощью лямбд."
     },
     {
       "id": "04",
       "slug": "04-kotlin-collections",
-      "title": "Ошибки, паттерны и первое Android-приложение",
-      "block": "Переход от языка к Android",
+      "title": "Ошибки, паттерны и первое приложение на Jetpack Compose",
+      "block": "Переход к Android",
       "href": "lectures/04-kotlin-collections/index.html",
-      "points": "",
-      "goal": "Организовать Kotlin-код с помощью простых паттернов и применить его в первом Android-экране."
+      "goal": "Организовать Kotlin-код с помощью небольших функций и паттернов, затем собрать первый экран FinanceApp на Jetpack Compose."
     },
     {
       "id": "05",
       "slug": "05-activity",
-      "title": "Activity: Context, UI, жизненный цикл, навигация",
+      "title": "Activity, состояние и жизненный цикл Compose",
       "block": "Основы Android",
       "href": "lectures/05-activity/index.html",
-      "points": "6",
-      "goal": "Понимать Activity как главный экран и уметь передавать данные между экранами."
+      "goal": "Понимать роль Activity как контейнера Compose и безопасно управлять состоянием экрана."
     },
     {
       "id": "06",
-      "slug": "06-ui-xml",
-      "title": "UI: XML, View и ViewGroup",
+      "slug": "06-compose-ui",
+      "title": "Jetpack Compose: layout, Material 3 и тема",
       "block": "Основы Android",
-      "href": "lectures/06-ui-xml/index.html",
-      "points": "6",
-      "goal": "Верстать экраны в XML и понимать дерево View."
+      "href": "lectures/06-compose-ui/index.html",
+      "goal": "Создавать адаптивные экраны декларативно с помощью Jetpack Compose и Material 3."
     },
     {
       "id": "07",
-      "slug": "07-recyclerview",
-      "title": "Списки: RecyclerView. Custom View (обзор)",
+      "slug": "07-compose-lists",
+      "title": "Списки в Compose: LazyColumn и состояние",
       "block": "Основы Android",
-      "href": "lectures/07-recyclerview/index.html",
-      "points": "6",
-      "goal": "Показывать списки данных; понимать, когда нужна своя View."
+      "href": "lectures/07-compose-lists/index.html",
+      "goal": "Эффективно показывать списки данных в Compose и обрабатывать действия пользователя."
     },
     {
       "id": "08",
-      "slug": "08-fragment-navigation",
-      "title": "Fragment и Jetpack Navigation",
+      "slug": "08-navigation-compose",
+      "title": "Navigation Compose",
       "block": "Основы Android",
-      "href": "lectures/08-fragment-navigation/index.html",
-      "points": "6",
-      "goal": "Собрать многоэкранное приложение на фрагментах, а не на пачке Activity."
+      "href": "lectures/08-navigation-compose/index.html",
+      "goal": "Собрать многоэкранное Compose-приложение с типобезопасной навигацией и понятным back stack."
     },
     {
       "id": "09",
@@ -84,7 +76,6 @@ window.COURSE = {
       "title": "Service, BroadcastReceiver, ContentProvider, Bundle",
       "block": "Компоненты и сеть",
       "href": "lectures/09-components/index.html",
-      "points": "5",
       "goal": "Знать карту компонентов Android и уметь применить Service / Broadcast на простом примере."
     },
     {
@@ -93,7 +84,6 @@ window.COURSE = {
       "title": "Сеть: HTTP, OkHttp, Retrofit. JSON и сериализация",
       "block": "Компоненты и сеть",
       "href": "lectures/10-network/index.html",
-      "points": "7",
       "goal": "Загрузить данные из API и разобрать JSON."
     },
     {
@@ -102,7 +92,6 @@ window.COURSE = {
       "title": "Coroutines и Flow",
       "block": "Компоненты и сеть",
       "href": "lectures/11-coroutines-flow/index.html",
-      "points": "7",
       "goal": "Асинхронщина без callback-ада; стримы данных через Flow."
     },
     {
@@ -111,7 +100,6 @@ window.COURSE = {
       "title": "Хранение данных: SharedPreferences, DataStore, Room, файлы",
       "block": "Данные",
       "href": "lectures/12-storage/index.html",
-      "points": "8",
       "goal": "Выбрать способ хранения и реализовать минимум два из них."
     },
     {
@@ -120,8 +108,7 @@ window.COURSE = {
       "title": "Архитектура: MVVM, MVP, MVI. SOLID и Clean Architecture",
       "block": "Архитектура",
       "href": "lectures/13-architecture/index.html",
-      "points": "6",
-      "goal": "Разложить приложение по слоям и перестать писать логику в Activity."
+      "goal": "Разложить Compose-приложение по слоям и вынести состояние и бизнес-логику из UI."
     },
     {
       "id": "14",
@@ -129,7 +116,6 @@ window.COURSE = {
       "title": "Паттерны проектирования. Dependency Injection и Hilt",
       "block": "Архитектура",
       "href": "lectures/14-patterns-hilt/index.html",
-      "points": "6",
       "goal": "Узнавать частые паттерны и собрать зависимости через Hilt, а не вручную."
     },
     {
@@ -138,7 +124,6 @@ window.COURSE = {
       "title": "Итоговое приложение. Самопроверка. Заключение",
       "block": "Финал",
       "href": "lectures/15-final/index.html",
-      "points": "15",
       "goal": "Собрать требования курса в одно приложение и зафиксировать, чему научились."
     }
   ],
@@ -148,10 +133,10 @@ window.COURSE = {
       "kind": "practice",
       "afterLecture": "01",
       "slug": "git-practice",
-      "title": "Практика Git: задания Learn Git Branching",
+      "title": "Практика Git: 10 базовых задач и 5 со звёздочкой",
       "block": "Практика",
       "href": "practice/git/index.html",
-      "goal": "Шесть простых задач: теория, условие, лёгкая подсказка и решение с таймером."
+      "goal": "Практические задачи от состояния файлов до работы с удалённым репозиторием."
     },
     {
       "id": "kotlin-02",
@@ -161,17 +146,27 @@ window.COURSE = {
       "title": "Практика 02: Kotlin, массивы и Map",
       "block": "Язык",
       "href": "practice/kotlin-02/index.html",
-      "goal": "Сначала Kotlin Koans, затем задачи из лекции и LeetCode: подсказки через 5 минут, решения через 20 минут."
+      "goal": "Kotlin Koans и задачи на синтаксис, коллекции и преобразование данных."
     },
     {
       "id": "kotlin-03",
       "kind": "practice",
       "afterLecture": "03",
       "slug": "kotlin-03-practice",
-      "title": "Практика 03: Kotlin ООП и первый Android-проект",
+      "title": "Практика 03: Kotlin ООП и первый Compose-проект",
       "block": "Язык",
       "href": "practice/kotlin-03/index.html",
-      "goal": "Классы, инкапсуляция, data class, интерфейсы и композиция в Kotlin Playground; затем разбор классов пустого Android-проекта."
+      "goal": "Классы, data class, интерфейсы и композиция в Kotlin; затем разбор классов первого Android-проекта на Jetpack Compose."
+    },
+    {
+      "id": "kotlin-04",
+      "kind": "practice",
+      "afterLecture": "04",
+      "slug": "kotlin-04-practice",
+      "title": "Практика 04: обновление FinanceApp и первый экран Compose",
+      "block": "Переход к Android",
+      "href": "practice/kotlin-04/index.html",
+      "goal": "Безопасно перенести старый XML/View-проект на Compose, реализовать состояние, события и чистый reducer."
     }
   ]
 };

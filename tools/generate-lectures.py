@@ -41,8 +41,7 @@ LECTURE_META = [
             "(по желанию) второй commit с изменением текста на экране",
         ],
         "branch": "lecture-01",
-        "points": "4",
-        "next": "Лекция 2 — Kotlin: основы языка",
+        "next": "Лекция 2 — Kotlin: основы языка и коллекции",
     },
     {
         "id": "02",
@@ -74,8 +73,7 @@ LECTURE_META = [
             "Приложить два скриншота с зелёными отметками выполнения",
         ],
         "branch": "lecture-02",
-        "points": "6",
-        "next": "Лекция 3 — Kotlin: классы и ООП",
+        "next": "Лекция 3 — Kotlin: ООП и функциональная обработка данных",
     },
     {
         "id": "03",
@@ -97,153 +95,151 @@ LECTURE_META = [
             "Ссылки на функции, fold и Sequence",
         ],
         "practice": [
-            "Модель предметной области курса (Task, User, статусы через enum / sealed)",
+            "Модель предметной области курса (Transaction, User, статусы через enum / sealed)",
+            "Реализация TransactionRepository и фильтрация операций",
         ],
         "homework": [
-            "Иерархия классов + data-классы + sealed",
-            "Самопроверка по ООП (короткий чеклист в README)",
-            "PR lecture-03",
+            "Пройти раздел Classes на Kotlin Playground",
+            "Доменная модель: Transaction, Category, TransactionType, TransactionRepository",
+            "PR lecture-03 в FinanceApp",
         ],
         "branch": "lecture-03",
-        "points": "6",
-        "next": "Лекция 4 — коллекции, ошибки, generics, первое Android-приложение",
+        "next": "Лекция 4 — Ошибки, паттерны и первое приложение на Compose",
     },
     {
         "id": "04",
         "slug": "04-kotlin-collections",
-        "title": "Kotlin: коллекции, ошибки, generics. Первое Android-приложение",
-        "block": "Язык",
+        "title": "Ошибки, паттерны и первое приложение на Jetpack Compose",
+        "block": "Переход к Android",
         "minutes": "90",
-        "goal": "Уверенно работать с коллекциями и исключениями; собрать первое Activity.",
+        "goal": "Организовать Kotlin-код с помощью небольших функций и паттернов, затем собрать первый экран FinanceApp на Jetpack Compose.",
         "theory": [
-            "Коллекции: List, Set, Map; mutable / immutable",
-            "Операции: map, filter, find, groupBy, forEach",
-            "Исключения: try / catch / finally, throw, свои исключения",
-            "Generics: зачем, простой пример (List<T>, свой класс)",
-            "Мост к Android: что такое Activity, как устроен модуль app",
+            "Kotlin-идиомы: guard clauses, expression body, extension- и scope-функции",
+            "Контракты, исключения и sealed-результаты",
+            "Практические паттерны: Factory, Repository, State",
+            "Разделение UI и бизнес-логики: однонаправленный поток данных (UDF)",
+            "Мост к Android: модуль app, AndroidManifest.xml, ComponentActivity и setContent",
+            "Composable-функции, Modifier, Material 3 и обработка событий через лямбды",
         ],
         "practice": [
-            "Задачи на коллекции",
-            "Создание Activity, TextView / Button из шаблона, обработка клика",
+            "Реализация reduce(state, event) и MainUiState",
+            "Создание composable-экрана в MainActivity через setContent",
+            "Обновление интерфейса из MainUiState и обработка нажатия",
         ],
         "homework": [
-            "Практика: коллекции + обработка ошибок",
-            "Мини-экран: кнопка меняет текст / счётчик",
+            "Запуск и изменение стартового FinanceApp",
+            "Смена текста / состояния по нажатию кнопки",
+            "Вынос пользовательских строк в ресурсы и использование stringResource",
             "PR lecture-04",
         ],
         "branch": "lecture-04",
-        "points": "6",
-        "next": "Лекция 5 — Activity: Context, UI, жизненный цикл, навигация",
+        "next": "Лекция 5 — Activity, состояние и жизненный цикл Compose",
     },
     {
         "id": "05",
         "slug": "05-activity",
-        "title": "Activity: Context, UI, жизненный цикл, навигация",
+        "title": "Activity, состояние и жизненный цикл Compose",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Понимать Activity как главный экран и уметь передавать данные между экранами.",
+        "goal": "Понимать роль Activity как контейнера Compose и безопасно управлять состоянием экрана.",
         "theory": [
             "Компоненты приложения: зачем четыре типа (обзор)",
-            "Activity подробнее",
+            "ComponentActivity как точка входа и контейнер Compose",
             "Context: зачем нужен, Activity vs applicationContext",
-            "UI в Activity: layout, findViewById / View Binding",
+            "setContent, дерево композиции и рекомпозиция",
             "Жизненный цикл Activity",
-            "Сохранение состояния: savedInstanceState, Bundle",
-            "Навигация между Activity: Intent, extras",
+            "Состояние: remember, mutableStateOf и rememberSaveable",
+            "Подъём состояния и однонаправленный поток данных",
         ],
         "practice": [
-            "Два экрана: список/форма → детали",
-            "Поворот экрана без потери введённого текста",
+            "Экран формы на Compose с состоянием, поднятым в родительский composable",
+            "Поворот экрана без потери введённых данных через rememberSaveable",
         ],
         "homework": [
-            "Приложение из 2+ Activity, передача данных через Intent",
-            "Корректное поведение при повороте",
+            "Экран Compose с состоянием и событиями",
+            "Корректное восстановление состояния после поворота",
             "PR lecture-05",
         ],
         "branch": "lecture-05",
-        "points": "6",
-        "next": "Лекция 6 — UI: XML, View и ViewGroup",
+        "next": "Лекция 6 — Jetpack Compose: layout, Material 3 и тема",
     },
     {
         "id": "06",
-        "slug": "06-ui-xml",
-        "title": "UI: XML, View и ViewGroup",
+        "slug": "06-compose-ui",
+        "title": "Jetpack Compose: layout, Material 3 и тема",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Верстать экраны в XML и понимать дерево View.",
+        "goal": "Создавать адаптивные экраны декларативно с помощью Jetpack Compose и Material 3.",
         "theory": [
-            "XML-вёрстка: структура layout-файла, namespaces",
-            "View и ViewGroup",
-            "Основные контейнеры: LinearLayout, FrameLayout, ConstraintLayout",
-            "Виджеты: TextView, EditText, Button, ImageView, ScrollView",
-            "Размеры: match_parent, wrap_content, dp / sp",
-            "Ресурсы: strings, colors, themes",
+            "Декларативный UI и правила работы composable-функций",
+            "Row, Column, Box и базовые элементы Material 3",
+            "Modifier: размер, отступы, фон, порядок модификаторов",
+            "Text, TextField, Button, Image и прокрутка",
+            "dp, sp, WindowInsets и адаптивные ограничения",
+            "MaterialTheme: цветовая схема, типографика и формы",
         ],
         "practice": [
-            "Экран формы / профиля на ConstraintLayout",
-            "Подключение вёрстки к Activity через View Binding",
+            "Экран формы или профиля на Compose",
+            "Превью, тема и переиспользуемые composable-компоненты",
         ],
         "homework": [
             "Сверстать 1–2 экрана по макету (или по скрину преподавателя)",
-            "Строки и цвета вынесены в ресурсы",
+            "Строки вынесены в ресурсы, цвета и типографика заданы темой",
             "PR lecture-06",
         ],
         "branch": "lecture-06",
-        "points": "6",
-        "next": "Лекция 7 — Списки: RecyclerView. Custom View",
+        "next": "Лекция 7 — Списки в Compose: LazyColumn и состояние",
     },
     {
         "id": "07",
-        "slug": "07-recyclerview",
-        "title": "Списки: RecyclerView. Custom View (обзор)",
+        "slug": "07-compose-lists",
+        "title": "Списки в Compose: LazyColumn и состояние",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Показывать списки данных; понимать, когда нужна своя View.",
+        "goal": "Эффективно показывать списки данных в Compose и обрабатывать действия пользователя.",
         "theory": [
-            "Зачем RecyclerView, идея ViewHolder и переиспользования",
-            "Adapter, DiffUtil (концепция)",
-            "Простой список и клик по элементу",
-            "Custom View: зачем нужна, когда не нужна",
-            "Как устроена своя View (измерение / отрисовка — обзор)",
+            "LazyColumn и LazyRow: ленивое создание элементов",
+            "items, стабильные key и contentType",
+            "Карточка элемента и события через лямбды",
+            "Состояния загрузки, пустого списка и ошибки",
+            "Производительность, стабильность параметров и derivedStateOf",
         ],
         "practice": [
-            "RecyclerView со списком из data-классов лекции 3",
+            "LazyColumn со списком из data-классов лекции 3",
             "Переход на экран деталей по клику",
         ],
         "homework": [
             "Список + детали в сквозном приложении",
-            "По желанию: простая Custom View (например, индикатор статуса)",
+            "Переиспользуемая карточка и корректные ключи элементов",
             "PR lecture-07",
         ],
         "branch": "lecture-07",
-        "points": "6",
-        "next": "Лекция 8 — Fragment и Jetpack Navigation",
+        "next": "Лекция 8 — Navigation Compose",
     },
     {
         "id": "08",
-        "slug": "08-fragment-navigation",
-        "title": "Fragment и Jetpack Navigation",
+        "slug": "08-navigation-compose",
+        "title": "Navigation Compose",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Собрать многоэкранное приложение на фрагментах, а не на пачке Activity.",
+        "goal": "Собрать многоэкранное Compose-приложение с типобезопасной навигацией и понятным back stack.",
         "theory": [
-            "Fragment: зачем, жизненный цикл, отличие от Activity",
-            "FragmentManager, транзакции (кратко)",
-            "Jetpack Navigation: граф, NavHost, NavController, аргументы",
-            "Safe Args (обзор)",
+            "Navigation Compose: NavHost, NavController и destinations",
+            "Маршруты и типобезопасная передача аргументов",
+            "Вложенные графы и структура навигации",
+            "Сохранение состояния экранов",
             "Back stack",
         ],
         "practice": [
-            "Перенос двух экранов на Fragment + Navigation Component",
+            "Связать два composable-экрана через Navigation Compose",
             "Передача аргумента на экран деталей",
         ],
         "homework": [
-            "Сквозное приложение переведено на Navigation",
-            "Минимум 2 фрагмента в графе",
+            "Сквозное приложение использует Navigation Compose",
+            "Минимум два composable-экрана в графе",
             "PR lecture-08",
         ],
         "branch": "lecture-08",
-        "points": "6",
         "next": "Лекция 9 — Service, BroadcastReceiver, ContentProvider",
     },
     {
@@ -269,7 +265,6 @@ LECTURE_META = [
             "PR lecture-09",
         ],
         "branch": "lecture-09",
-        "points": "5",
         "next": "Лекция 10 — Сеть: HTTP, OkHttp, Retrofit, JSON",
     },
     {
@@ -289,7 +284,7 @@ LECTURE_META = [
         ],
         "practice": [
             "GET-запрос к публичному API",
-            "Отображение результата в RecyclerView",
+            "Отображение результата в LazyColumn",
         ],
         "homework": [
             "Список с сервера + экран деталей",
@@ -297,7 +292,6 @@ LECTURE_META = [
             "PR lecture-10",
         ],
         "branch": "lecture-10",
-        "points": "7",
         "next": "Лекция 11 — Coroutines и Flow",
     },
     {
@@ -315,7 +309,7 @@ LECTURE_META = [
             "suspend-функции в Retrofit",
             "Flow: холодный поток, collect",
             "Операторы: map, filter, catch, onEach",
-            "Связка с UI: lifecycleScope / repeatOnLifecycle (обзор)",
+            "Связка с Compose UI: collectAsStateWithLifecycle",
         ],
         "practice": [
             "Переписать сетевой запрос на корутины",
@@ -327,7 +321,6 @@ LECTURE_META = [
             "PR lecture-11",
         ],
         "branch": "lecture-11",
-        "points": "7",
         "next": "Лекция 12 — SharedPreferences, DataStore, Room, файлы",
     },
     {
@@ -357,7 +350,6 @@ LECTURE_META = [
             "PR lecture-12",
         ],
         "branch": "lecture-12",
-        "points": "8",
         "next": "Лекция 13 — MVVM, SOLID и Clean Architecture",
     },
     {
@@ -366,7 +358,7 @@ LECTURE_META = [
         "title": "Архитектура: MVVM, MVP, MVI. SOLID и Clean Architecture",
         "block": "Архитектура",
         "minutes": "90",
-        "goal": "Разложить приложение по слоям и перестать писать логику в Activity.",
+        "goal": "Разложить Compose-приложение по слоям и вынести состояние и бизнес-логику из UI.",
         "theory": [
             "Зачем архитектура в Android",
             "MVP, MVVM, MVI — сравнение, акцент на MVVM",
@@ -384,7 +376,6 @@ LECTURE_META = [
             "PR lecture-13",
         ],
         "branch": "lecture-13",
-        "points": "6",
         "next": "Лекция 14 — Паттерны проектирования, DI и Hilt",
     },
     {
@@ -411,7 +402,6 @@ LECTURE_META = [
             "PR lecture-14",
         ],
         "branch": "lecture-14",
-        "points": "6",
         "next": "Лекция 15 — Итоговое приложение, самопроверка, заключение",
     },
     {
@@ -423,8 +413,8 @@ LECTURE_META = [
         "goal": "Собрать требования курса в одно приложение и зафиксировать, чему научились.",
         "theory": [
             "Чеклист курса: что должно быть в итоговом приложении",
-            "Типичные ошибки (жизненный цикл, утечки Context, сеть на главном потоке, логика в Activity)",
-            "Что учить дальше: Compose, тестирование, WorkManager, пагинация, безопасность",
+            "Типичные ошибки (нестабильное состояние, лишние рекомпозиции, сеть на главном потоке, логика в composable)",
+            "Что учить дальше: тестирование Compose, WorkManager, пагинация, безопасность",
             "Обратная связь по курсу",
         ],
         "practice": [
@@ -439,8 +429,8 @@ LECTURE_META = [
         ],
         "final_checklist": [
             "Kotlin, Git-история с лекции 1",
-            "Несколько экранов на Fragment + Navigation",
-            "Список (RecyclerView)",
+            "Несколько экранов на Navigation Compose",
+            "Список на LazyColumn",
             "Сеть (Retrofit) + JSON",
             "Корутины (и желательно Flow)",
             "Локальное хранение (Room и/или DataStore)",
@@ -448,8 +438,40 @@ LECTURE_META = [
             "Hilt",
         ],
         "branch": "release-1.0",
-        "points": "15",
-        "next": "Курс завершён. Что дальше — Compose, тесты, WorkManager.",
+        "next": "Курс завершён. Что дальше — тестирование Compose, WorkManager и пагинация.",
+    },
+]
+
+PRACTICES = [
+    {
+        "id": "git",
+        "kind": "practice",
+        "afterLecture": "01",
+        "slug": "git-practice",
+        "title": "Практика Git: 10 базовых задач и 5 со звёздочкой",
+        "block": "Практика",
+        "href": "practice/git/index.html",
+        "goal": "Практические задачи от состояния файлов до работы с удалённым репозиторием.",
+    },
+    {
+        "id": "kotlin-02",
+        "kind": "practice",
+        "afterLecture": "02",
+        "slug": "kotlin-02-practice",
+        "title": "Практика 02: Kotlin, массивы и Map",
+        "block": "Язык",
+        "href": "practice/kotlin-02/index.html",
+        "goal": "Kotlin Koans и задачи на синтаксис, коллекции и преобразование данных.",
+    },
+    {
+        "id": "kotlin-03",
+        "kind": "practice",
+        "afterLecture": "03",
+        "slug": "kotlin-03-practice",
+        "title": "Практика 03: Kotlin ООП и первый Compose-проект",
+        "block": "Язык",
+        "href": "practice/kotlin-03/index.html",
+        "goal": "Классы, data class, интерфейсы и композиция в Kotlin; затем разбор классов первого Android-проекта на Jetpack Compose.",
     },
 ]
 
@@ -491,7 +513,6 @@ def plan_md(meta: dict) -> str:
 **Блок:** {meta['block']}  
 **Длительность:** пара {meta['minutes']} мин (теория + живая практика)  
 **Ветка / PR:** `{meta['branch']}`  
-**Баллы:** {meta['points']}
 
 ## Цель
 
@@ -515,6 +536,51 @@ def plan_md(meta: dict) -> str:
 """
 
 
+def course_plan_md() -> str:
+    sections = [
+        "# План курса «Android-разработка на Jetpack Compose»",
+        "",
+        "Курс построен вокруг одного сквозного приложения на Kotlin и Jetpack Compose. "
+        "XML-разметка, View и Fragment не используются в проекте; они упоминаются только как legacy-подход, который можно встретить в существующих приложениях.",
+        "",
+        "## Формат",
+        "",
+        "- 15 занятий по 90 минут: теория и живая практика.",
+        "- На каждом занятии студенты развивают один Compose-проект.",
+        "- Изменения сохраняются в Git и обсуждаются через Pull Request.",
+        "- В лекциях собраны материал, примеры и практические задания.",
+        "",
+        "## Лекции",
+        "",
+    ]
+    for meta in LECTURE_META:
+        sections.extend(
+            [
+                f"### {int(meta['id'])}. {meta['title']}",
+                "",
+                meta["goal"],
+                "",
+                "**Материал**",
+                "",
+                bullets_md(meta["theory"]),
+                "",
+                "**Практика**",
+                "",
+                bullets_md(meta["practice"]),
+                "",
+                "**Самостоятельная работа**",
+                "",
+                bullets_md(meta["homework"]),
+                "",
+            ]
+        )
+        if meta.get("final_checklist"):
+            sections.extend(
+                ["**Итоговый проект**", "", bullets_md(meta["final_checklist"]), ""]
+            )
+    return "\n".join(sections).rstrip() + "\n"
+
+
 def outline_slides(meta: dict) -> list[dict]:
     n = int(meta["id"])
     slides = [
@@ -526,7 +592,7 @@ def outline_slides(meta: dict) -> list[dict]:
                 [
                     "Курс из 15 лекций · пара 1,5 часа",
                     f"Блок: **{meta['block']}**",
-                    f"Ветка: `{meta['branch']}` · {meta['points']} баллов",
+                    f"Ветка: `{meta['branch']}`",
                     "Преподаватель: Сучёв Николай Евгеньевич",
                 ]
             ),
@@ -690,10 +756,6 @@ def write_slides_js(path: Path, meta: dict, slides: list[dict]) -> None:
 
 
 def main() -> None:
-    prompt = ROOT / "lectures" / "lecture-01-slides-prompt.md"
-    l1_slides = parse_lecture1(prompt)
-    print(f"lecture 1 slides: {len(l1_slides)}")
-
     catalog = []
     for meta in LECTURE_META:
         folder = LECTURES / meta["slug"]
@@ -703,8 +765,10 @@ def main() -> None:
             INDEX_HTML.format(id=meta["id"], title=meta["title"]),
             encoding="utf-8",
         )
-        slides = l1_slides if meta["id"] == "01" else outline_slides(meta)
-        write_slides_js(folder / "slides.js", meta, slides)
+        # Лекции 1 и 2 содержат расширенные авторские слайды и не должны
+        # перезаписываться кратким шаблоном при обновлении структуры курса.
+        if meta["id"] not in {"01", "02"}:
+            write_slides_js(folder / "slides.js", meta, outline_slides(meta))
         catalog.append(
             {
                 "id": meta["id"],
@@ -712,7 +776,6 @@ def main() -> None:
                 "title": meta["title"],
                 "block": meta["block"],
                 "href": f"lectures/{meta['slug']}/index.html",
-                "points": meta["points"],
                 "goal": meta["goal"],
             }
         )
@@ -729,6 +792,7 @@ def main() -> None:
                 "photo": "assets/teacher.jpg",
                 "subtitle": "15 лекций · пара 1,5 часа · сквозной проект",
                 "lectures": catalog,
+                "practices": PRACTICES,
             },
             ensure_ascii=False,
             indent=2,
@@ -736,6 +800,7 @@ def main() -> None:
         + ";\n",
         encoding="utf-8",
     )
+    (ROOT / "PLAN.md").write_text(course_plan_md(), encoding="utf-8")
     print("done")
 
 

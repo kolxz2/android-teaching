@@ -3,7 +3,6 @@
 **Блок:** Компоненты и сеть  
 **Длительность:** пара 90 мин (теория + живая практика)  
 **Ветка / PR:** `lecture-11`  
-**Баллы:** 7
 
 ## Цель
 
@@ -18,7 +17,7 @@
 - suspend-функции в Retrofit
 - Flow: холодный поток, collect
 - Операторы: map, filter, catch, onEach
-- Связка с UI: lifecycleScope / repeatOnLifecycle (обзор)
+- Связка с Compose UI: collectAsStateWithLifecycle
 
 ## Практика на паре
 

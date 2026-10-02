@@ -2,9 +2,7 @@
 
 **Блок:** Старт и инструменты  
 **Длительность:** пара 90 мин (теория + живая практика)  
-**Репозиторий:** [FinanceApp](https://github.com/kolxz2/FinanceApp)  
-**Ветка / PR:** `homework/01-short-description` → `master`  
-**Баллы:** 4
+**Ветка / PR:** `lecture-01`  
 
 ## Цель
 
@@ -24,20 +22,18 @@
 ## Практика на паре
 
 - Установка / проверка Android Studio
-- Клонирование [FinanceApp](https://github.com/kolxz2/FinanceApp), Gradle Sync и запуск
-- Обновление `master` и создание ветки `homework/01-short-description`
-- Локальная проверка: Detekt, unit-тесты, Android Lint, debug APK
-- Commit и push своей ветки
-- Первый Pull Request в `master`, назначение `kolxz2` reviewer
-- Просмотр результатов GitHub Actions и ссылки на APK
+- Клонирование основного проекта и запуск
+- git init, первый commit
+- Репозиторий на GitHub, git remote add, git push
+- Ветка lecture-01 и Pull Request
 
 ## Домашнее задание
 
-- FinanceApp клонирован и запускается
-- Работа выполнена в ветке `homework/01-short-description`
-- Локальные проверки проходят
-- Pull Request открыт в `master`, преподаватель назначен reviewer
+- Репозиторий курса создан и доступен преподавателю
+- Hello World запушен в main
+- README: ФИО, скриншот приложения на эмуляторе
+- (по желанию) второй commit с изменением текста на экране
 
 ## Дальше
 
-Лекция 2 — Kotlin: основы языка
+Лекция 2 — Kotlin: основы языка и коллекции

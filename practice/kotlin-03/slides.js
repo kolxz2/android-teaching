@@ -7,43 +7,43 @@ const testBlock = (tests) => md(
 
 const tasks = [
   {
-    name: "Класс Student",
+    name: "Класс Counter",
     minutes: 12,
     body: md(
-      "Создайте класс `Student` с неизменяемым свойством `name`, изменяемым свойством `points` и методом `addPoints(value: Int)`. Метод принимает только положительное количество баллов. Добавьте метод `isPassed(): Boolean`: студент с 60 баллами или больше сдал курс.",
+      "Создайте класс `Counter` с неизменяемым свойством `name`, изменяемым свойством `value` и методом `increment(step: Int)`. Шаг должен быть положительным. Добавьте метод `hasReached(target: Int): Boolean`.",
       "",
       "Стартовый код:",
       "```kotlin",
-      "class Student(/* параметры */) {",
+      "class Counter(/* параметры */) {",
       "    // свойства и методы",
       "}",
       "",
       "fun main() {",
-      "    val student = Student(\"Аня\", 55)",
-      "    student.addPoints(10)",
-      "    println(student.points)",
-      "    println(student.isPassed())",
+      "    val counter = Counter(\"Загрузка\", 55)",
+      "    counter.increment(10)",
+      "    println(counter.value)",
+      "    println(counter.hasReached(60))",
       "}",
       "```",
       testBlock([
-        { call: "Student(\"Аня\", 55) + 10", expected: "65; true" },
-        { call: "Student(\"Борис\", 0)", expected: "0; false" },
-        { call: "addPoints(0)", expected: "ошибка IllegalArgumentException" }
+        { call: "Counter(\"Загрузка\", 55) + 10", expected: "65; true" },
+        { call: "Counter(\"Шаги\", 0)", expected: "0; false" },
+        { call: "increment(0)", expected: "ошибка IllegalArgumentException" }
       ])
     ),
     hint: "Параметры конструктора можно сразу объявить свойствами через `val` и `var`. Проверку аргумента сделайте с помощью `require(value > 0)`.",
     solution: md(
       "```kotlin",
-      "class Student(val name: String, var points: Int) {",
-      "    fun addPoints(value: Int) {",
-      "        require(value > 0) { \"Баллы должны быть положительными\" }",
-      "        points += value",
+      "class Counter(val name: String, var value: Int) {",
+      "    fun increment(step: Int) {",
+      "        require(step > 0) { \"Шаг должен быть положительным\" }",
+      "        value += step",
       "    }",
       "",
-      "    fun isPassed(): Boolean = points >= 60",
+      "    fun hasReached(target: Int): Boolean = value >= target",
       "}",
       "```",
-      "`Student(...)` создаёт объект. `points` хранит его состояние, а методы описывают поведение."
+      "`Counter(...)` создаёт объект. `value` хранит его состояние, а методы описывают поведение."
     )
   },
   {
@@ -278,15 +278,15 @@ window.DECK = {
     ...slidesForTasks(),
     {
       type: "section",
-      title: "Часть 2. Встречаем Android",
+      title: "Часть 2. Встречаем Jetpack Compose",
       subtitle: "FinanceApp · 22 минуты",
-      body: "Ничего не заучиваем. Наша задача — увидеть, что Android-проект тоже состоит из классов, объектов, методов и связей между ними."
+      body: "Ничего не заучиваем. Наша задача — увидеть, как знакомые классы, функции и лямбды используются в Compose-проекте."
     },
     {
       type: "content",
-      title: "Карта проекта: четыре остановки",
+      title: "Карта Compose-проекта",
       badge: "Android Studio",
-      body: "1. `AndroidManifest.xml` — сообщает системе, какие компоненты есть в приложении.\n2. `MainActivity.kt` — Kotlin-класс первого экрана и его поведение.\n3. `res/layout/activity_main.xml` — описание дерева объектов интерфейса.\n4. `res/values/strings.xml` — тексты отдельно от кода и разметки.\n\nДополнительно: `ExampleUnitTest` запускается на компьютере, `ExampleInstrumentedTest` — на Android-устройстве или эмуляторе."
+      body: "1. `AndroidManifest.xml` — сообщает системе о стартовой Activity.\n2. `MainActivity.kt` — Kotlin-класс, который размещает Compose UI через `setContent`.\n3. `ui/theme` — цветовая схема, типографика и тема Material 3.\n4. `res/values/strings.xml` — пользовательские тексты для `stringResource`.\n\nДополнительно: локальные тесты запускаются на компьютере, инструментальные — на устройстве или эмуляторе."
     },
     {
       type: "content",
@@ -312,81 +312,86 @@ window.DECK = {
       badge: "Наследование и override",
       body: md(
         "```kotlin",
-        "class MainActivity : AppCompatActivity() {",
+        "class MainActivity : ComponentActivity() {",
         "    override fun onCreate(savedInstanceState: Bundle?) {",
         "        super.onCreate(savedInstanceState)",
-        "        setContentView(R.layout.activity_main)",
+        "        setContent { FinanceAppTheme { FinanceScreen() } }",
         "    }",
         "}",
         "```",
-        "- `: AppCompatActivity()` — наследование от готового Android-класса.\n- `override` — своя реализация метода родителя.\n- `Bundle?` — параметр может быть `null`.\n- `super.onCreate(...)` — сначала даём родителю выполнить его часть работы."
+        "- `: ComponentActivity()` — наследование от готового Android-класса.\n- `override` — своя реализация метода родителя.\n- `Bundle?` — параметр может быть `null`.\n- `setContent` задаёт корень Compose-интерфейса."
       )
     },
     {
       type: "content",
-      title: "XML превращается в объекты",
-      badge: "activity_main.xml",
-      body: md(
-        "```xml",
-        "<TextView",
-        "    android:id=\"@+id/statusText\"",
-        "    android:text=\"@string/test_screen_message\" />",
-        "",
-        "<Button",
-        "    android:id=\"@+id/checkButton\"",
-        "    android:text=\"@string/check_button\" />",
-        "```",
-        "`TextView` и `Button` — имена классов Android. При `setContentView(...)` система читает XML и создаёт объекты этих классов. Атрибуты задают их свойства. `@+id/...` даёт объекту идентификатор."
-      )
-    },
-    {
-      type: "content",
-      title: "R — сгенерированный класс-связка",
-      badge: "Код ↔ ресурсы",
+      title: "Composable-функция описывает интерфейс",
+      badge: "FinanceScreen.kt",
       body: md(
         "```kotlin",
-        "setContentView(R.layout.activity_main)",
-        "val statusText = findViewById<TextView>(R.id.statusText)",
+        "@Composable",
+        "fun FinanceScreen() {",
+        "    Column(modifier = Modifier.padding(16.dp)) {",
+        "        Text(text = stringResource(R.string.test_screen_message))",
+        "        Button(onClick = { /* событие */ }) {",
+        "            Text(stringResource(R.string.check_button))",
+        "        }",
+        "    }",
+        "}",
         "```",
-        "`R` не написан вручную: Android Gradle Plugin генерирует его из файлов в `res`. Внутри есть идентификаторы `layout`, `id`, `string` и других ресурсов.\n\n`findViewById<TextView>` — generic-функция: мы сообщаем ожидаемый тип найденного объекта."
+        "Composable-функции декларативно описывают текущий интерфейс. `Modifier` настраивает расположение и внешний вид, а лямбда `onClick` сообщает о событии."
       )
     },
     {
       type: "content",
-      title: "Нажатие — обычная лямбда",
+      title: "Состояние управляет интерфейсом",
+      badge: "rememberSaveable",
+      body: md(
+        "```kotlin",
+        "var checked by rememberSaveable { mutableStateOf(false) }",
+        "Button(onClick = { checked = true }) {",
+        "    Text(if (checked) \"Готово\" else \"Проверить\")",
+        "}",
+        "```",
+        "Compose читает состояние и перестраивает затронутую часть интерфейса после его изменения. UI не ищет и не изменяет View-объекты вручную."
+      )
+    },
+    {
+      type: "content",
+      title: "Событие — обычная лямбда",
       badge: "Объекты и поведение",
       body: md(
         "```kotlin",
-        "findViewById<Button>(R.id.checkButton).setOnClickListener {",
-        "    statusText.setText(R.string.check_success_message)",
+        "@Composable",
+        "fun CheckButton(onCheck: () -> Unit) {",
+        "    Button(onClick = onCheck) { Text(\"Проверить\") }",
         "}",
         "```",
-        "1. Находим объект `Button`.\n2. Передаём в его метод лямбду — действие на будущее.\n3. Android хранит listener.\n4. Пользователь нажимает кнопку — Android вызывает лямбду.\n5. У объекта `TextView` вызывается `setText`."
+        "1. Composable получает событие как параметр.\n2. `Button` получает эту лямбду в `onClick`.\n3. Пользователь нажимает кнопку.\n4. Compose вызывает лямбду.\n5. Владелец состояния решает, как изменить данные."
       )
     },
     {
       type: "practice",
-      title: "Экскурсия: найдите 10 знакомых конструкций",
+      title: "Экскурсия: найдите знакомые конструкции",
       badge: "Работа в парах · 7 минут",
-      body: "Откройте `MainActivity.kt` и покажите друг другу:\n\n- [ ] объявление класса и родительский класс\n- [ ] переопределённый метод\n- [ ] вызов реализации родителя\n- [ ] nullable-параметр\n- [ ] generic-вызов с `TextView`\n- [ ] объект класса `Button`\n- [ ] лямбду-обработчик\n- [ ] обращение к сгенерированному классу `R`\n- [ ] два идентификатора из XML\n- [ ] изменение состояния объекта `TextView`\n\nПосле этого один студент объясняет путь события от нажатия до нового текста."
+      body: "Откройте `MainActivity.kt` и файл экрана. Покажите друг другу:\n\n- [ ] объявление класса и родительский класс\n- [ ] переопределённый метод\n- [ ] вызов реализации родителя\n- [ ] `setContent`\n- [ ] аннотацию `@Composable`\n- [ ] параметры composable-функции\n- [ ] `Modifier`\n- [ ] лямду `onClick`\n- [ ] чтение строкового ресурса\n- [ ] чтение и изменение состояния\n\nПосле этого объясните путь события от нажатия до нового UI."
     },
     {
       type: "practice",
       title: "Первое безопасное изменение",
       badge: "Android Studio · 6 минут",
-      body: "1. Откройте `res/values/strings.xml`.\n2. Найдите ресурсы `check_button` и `check_success_message`.\n3. Измените оба текста, не меняя их имена.\n4. Запустите приложение.\n5. Нажмите кнопку и проверьте новый текст.\n\nПочему начинаем со `strings.xml`: Kotlin-код и XML уже ссылаются на имена ресурсов, поэтому меняется содержимое, а связи между объектами остаются прежними."
+      body: "1. Откройте composable-функцию экрана.\n2. Найдите `Text`, `Button` и обработчик `onClick`.\n3. Добавьте локальное состояние через `rememberSaveable`.\n4. После нажатия меняйте текст на экране.\n5. Запустите приложение и проверьте поведение после поворота.\n\nПользовательские строки оставьте в `strings.xml` и читайте через `stringResource`."
     },
     {
       type: "content",
       title: "Что пока можно считать чёрным ящиком",
       badge: "Не перегружаемся",
-      body: "Сегодня не требуется понимать подробно:\n\n- как работает Gradle и весь `build.gradle.kts`;\n- зачем нужны `enableEdgeToEdge` и системные insets;\n- все состояния жизненного цикла Activity;\n- правила ConstraintLayout;\n- разницу между локальными и инструментальными тестами.\n\nДостаточно видеть границы: Android создаёт Activity, Activity создаёт интерфейс из XML, а объекты View реагируют на события."
+      body: "Сегодня не требуется понимать подробно:\n\n- как работает Gradle и весь `build.gradle.kts`;\n- как устроены рекомпозиция и snapshot system;\n- зачем нужны системные insets;\n- все состояния жизненного цикла Activity;\n- разницу между локальными и инструментальными тестами.\n\nДостаточно видеть границы: Android создаёт Activity, Activity вызывает `setContent`, а composable-функции показывают состояние и отправляют события."
     },
     {
       type: "homework",
       title: "Exit ticket",
       badge: "Последние 2 минуты",
-      body: "Закончите три фразы:\n\n1. `MainActivity` — это класс, который наследуется от …\n2. После `setContentView(...)` XML превращается в …\n3. Код внутри `setOnClickListener { ... }` называется … и выполняется, когда …\n\n**Сдано, если:** четыре задания запускаются в Playground, приложение стартует, а студент может объяснить путь `manifest → MainActivity → XML → Button → TextView`."
+      body: "Закончите три фразы:\n\n1. `MainActivity` — это класс, который наследуется от …\n2. `setContent { ... }` задаёт …\n3. Код в `onClick = { ... }` называется … и выполняется, когда …\n\nПрактика завершена, если четыре задания запускаются в Playground, приложение стартует, а студент может объяснить путь `manifest → MainActivity → setContent → composable → state`."
     }
   ]
 };

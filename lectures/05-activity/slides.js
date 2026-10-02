@@ -3,7 +3,7 @@ window.DECK = {
   "lecture": 5,
   "lectureId": "05",
   "slug": "05-activity",
-  "title": "Activity: Context, UI, жизненный цикл, навигация",
+  "title": "Activity, состояние и жизненный цикл Compose",
   "block": "Основы Android",
   "teacher": "Сучёв Николай Евгеньевич",
   "teacherMeta": "Android-разработчик · Т-Банк · команда Вовлечение",
@@ -13,24 +13,24 @@ window.DECK = {
     {
       "type": "title",
       "title": "Android-разработка",
-      "subtitle": "Лекция 5. Activity: Context, UI, жизненный цикл, навигация",
-      "body": "- Курс из 15 лекций · пара 1,5 часа\n- Блок: **Основы Android**\n- Ветка: `lecture-05` · 6 баллов\n- Преподаватель: Сучёв Николай Евгеньевич",
+      "subtitle": "Лекция 5. Activity, состояние и жизненный цикл Compose",
+      "body": "- Курс из 15 лекций · пара 1,5 часа\n- Блок: **Основы Android**\n- Ветка: `lecture-05`\n- Преподаватель: Сучёв Николай Евгеньевич",
       "kicker": "05 / 15"
     },
     {
       "type": "content",
       "title": "Что вы умеете к концу пары",
-      "body": "- Понимать Activity как главный экран и уметь передавать данные между экранами.\n- Компоненты приложения: зачем четыре типа (обзор)\n- Activity подробнее\n- Context: зачем нужен, Activity vs applicationContext"
+      "body": "- Понимать роль Activity как контейнера Compose и безопасно управлять состоянием экрана.\n- Компоненты приложения: зачем четыре типа (обзор)\n- ComponentActivity как точка входа и контейнер Compose\n- Context: зачем нужен, Activity vs applicationContext"
     },
     {
       "type": "section",
       "title": "Теория",
-      "subtitle": "Activity: Context, UI, жизненный цикл, навигация"
+      "subtitle": "Activity, состояние и жизненный цикл Compose"
     },
     {
       "type": "content",
       "title": "План теории",
-      "body": "- Компоненты приложения: зачем четыре типа (обзор)\n- Activity подробнее\n- Context: зачем нужен, Activity vs applicationContext\n- UI в Activity: layout, findViewById / View Binding\n- Жизненный цикл Activity\n- Сохранение состояния: savedInstanceState, Bundle\n- Навигация между Activity: Intent, extras"
+      "body": "- Компоненты приложения: зачем четыре типа (обзор)\n- ComponentActivity как точка входа и контейнер Compose\n- Context: зачем нужен, Activity vs applicationContext\n- setContent, дерево композиции и рекомпозиция\n- Жизненный цикл Activity\n- Состояние: remember, mutableStateOf и rememberSaveable\n- Подъём состояния и однонаправленный поток данных"
     },
     {
       "type": "section",
@@ -42,18 +42,18 @@ window.DECK = {
       "type": "content",
       "title": "Практика на паре",
       "badge": "Практика",
-      "body": "- Два экрана: список/форма → детали\n- Поворот экрана без потери введённого текста"
+      "body": "- Экран формы на Compose с состоянием, поднятым в родительский composable\n- Поворот экрана без потери введённых данных через rememberSaveable"
     },
     {
       "type": "content",
       "title": "Домашнее задание",
       "badge": "Домашнее задание",
-      "body": "- Приложение из 2+ Activity, передача данных через Intent\n- Корректное поведение при повороте\n- PR lecture-05\n\nДедлайн: **7 дней**. Ветка `lecture-05`, PR в `main`."
+      "body": "- Экран Compose с состоянием и событиями\n- Корректное восстановление состояния после поворота\n- PR lecture-05\n\nДедлайн: **7 дней**. Ветка `lecture-05`, PR в `main`."
     },
     {
       "type": "content",
       "title": "Что дальше",
-      "body": "- Лекция 6 — UI: XML, View и ViewGroup\n- Git-процесс тот же: ветка → commit → push → PR."
+      "body": "- Лекция 6 — Jetpack Compose: layout, Material 3 и тема\n- Git-процесс тот же: ветка → commit → push → PR."
     },
     {
       "type": "section",
