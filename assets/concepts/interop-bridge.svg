@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="xmlGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748B"/>
+      <stop offset="100%" stop-color="#334155"/>
+    </linearGradient>
+    <linearGradient id="cmpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <filter id="shadow7" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#F8FAFC" rx="16"/>
+
+  <text x="400" y="48" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A" text-anchor="middle">Двусторонняя интероперабельность (Interop)</text>
+  <text x="400" y="74" font-family="system-ui, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">Бесшовная интеграция Compose в старый XML и старых View в Compose</text>
+
+  <!-- Left: Compose inside XML -->
+  <g filter="url(#shadow7)">
+    <rect x="60" y="110" width="310" height="280" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+    <rect x="60" y="110" width="310" height="45" rx="16" fill="url(#xmlGrad)"/>
+    <text x="215" y="139" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Старый XML экран</text>
+
+    <!-- Embedded ComposeView -->
+    <rect x="90" y="180" width="250" height="180" rx="12" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2" stroke-dasharray="6"/>
+    <rect x="110" y="200" width="210" height="36" rx="8" fill="#3B82F6"/>
+    <text x="215" y="223" font-family="monospace" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">&lt;ComposeView&gt;</text>
+    
+    <text x="215" y="270" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#1E40AF" text-anchor="middle">Новая фича на Compose</text>
+    <text x="215" y="295" font-family="monospace" font-size="12" fill="#475569" text-anchor="middle">composeView.setContent {</text>
+    <text x="215" y="315" font-family="monospace" font-size="12" fill="#475569" text-anchor="middle">  NewFeatureScreen()</text>
+    <text x="215" y="335" font-family="monospace" font-size="12" fill="#475569" text-anchor="middle">}</text>
+  </g>
+
+  <!-- Right: XML View inside Compose -->
+  <g filter="url(#shadow7)">
+    <rect x="430" y="110" width="310" height="280" rx="16" fill="#FFFFFF" stroke="#BFDBFE" stroke-width="2"/>
+    <rect x="430" y="110" width="310" height="45" rx="16" fill="url(#cmpGrad)"/>
+    <text x="585" y="139" font-family="system-ui, sans-serif" font-size="15" font-weight="700" fill="#FFFFFF" text-anchor="middle">Новый Compose экран</text>
+
+    <!-- Embedded AndroidView -->
+    <rect x="460" y="180" width="250" height="180" rx="12" fill="#F8FAFC" stroke="#64748B" stroke-width="2" stroke-dasharray="6"/>
+    <rect x="480" y="200" width="210" height="36" rx="8" fill="#475569"/>
+    <text x="585" y="223" font-family="monospace" font-size="13" font-weight="700" fill="#FFFFFF" text-anchor="middle">AndroidView { ... }</text>
+    
+    <text x="585" y="270" font-family="system-ui, sans-serif" font-size="14" font-weight="700" fill="#334155" text-anchor="middle">Старая View библиотека</text>
+    <text x="585" y="295" font-family="monospace" font-size="12" fill="#475569" text-anchor="middle">factory = { ctx -></text>
+    <text x="585" y="315" font-family="monospace" font-size="12" fill="#475569" text-anchor="middle">  MapView(ctx)</text>
+    <text x="585" y="335" font-family="monospace" font-size="12" fill="#475569" text-anchor="middle">}</text>
+  </g>
+
+  <!-- Footer note -->
+  <rect x="100" y="415" width="600" height="38" rx="8" fill="#F1F5F9"/>
+  <text x="400" y="439" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">Переход на Compose не требует остановки разработки: миграция идёт поэтапно.</text>
+</svg>

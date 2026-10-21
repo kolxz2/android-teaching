@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1E40AF"/>
+    </linearGradient>
+    <linearGradient id="viewGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+    <filter id="shadow3" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#F8FAFC" rx="16"/>
+
+  <text x="400" y="48" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A" text-anchor="middle">Проблема двойного состояния (Double State)</text>
+  <text x="400" y="74" font-family="system-ui, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">Рассинхронизация между моделью в памяти и состоянием View в UI</text>
+
+  <!-- Left Card: Business State -->
+  <g filter="url(#shadow3)">
+    <rect x="70" y="115" width="280" height="260" rx="16" fill="#FFFFFF" stroke="#DBEAFE" stroke-width="2"/>
+    <rect x="70" y="115" width="280" height="50" rx="16" fill="url(#dataGrad)"/>
+    <text x="210" y="146" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">Источник 1: Модель данных</text>
+    
+    <rect x="90" y="185" width="240" height="42" rx="8" fill="#F1F5F9"/>
+    <text x="105" y="211" font-family="monospace" font-size="13" fill="#1E293B">var isLoading = false</text>
+
+    <rect x="90" y="240" width="240" height="42" rx="8" fill="#F1F5F9"/>
+    <text x="105" y="266" font-family="monospace" font-size="13" fill="#1E293B">var error: String? = null</text>
+
+    <rect x="90" y="295" width="240" height="42" rx="8" fill="#F1F5F9"/>
+    <text x="105" y="321" font-family="monospace" font-size="13" fill="#1E293B">var count = 5</text>
+  </g>
+
+  <!-- Right Card: View Internal State -->
+  <g filter="url(#shadow3)">
+    <rect x="450" y="115" width="280" height="260" rx="16" fill="#FFFFFF" stroke="#FEE2E2" stroke-width="2"/>
+    <rect x="450" y="115" width="280" height="50" rx="16" fill="url(#viewGrad)"/>
+    <text x="590" y="146" font-family="system-ui, sans-serif" font-size="16" font-weight="700" fill="#FFFFFF" text-anchor="middle">Источник 2: Состояние View</text>
+    
+    <rect x="470" y="185" width="240" height="42" rx="8" fill="#FEF2F2" stroke="#FCA5A5"/>
+    <text x="485" y="211" font-family="monospace" font-size="13" fill="#991B1B">progressBar.visibility = VISIBLE</text>
+
+    <rect x="470" y="240" width="240" height="42" rx="8" fill="#F1F5F9"/>
+    <text x="485" y="266" font-family="monospace" font-size="13" fill="#1E293B">errorText.text = "Ошибка 404"</text>
+
+    <rect x="470" y="295" width="240" height="42" rx="8" fill="#F1F5F9"/>
+    <text x="485" y="321" font-family="monospace" font-size="13" fill="#1E293B">counterTextView.text = "4"</text>
+  </g>
+
+  <!-- Middle Conflict Indicator -->
+  <circle cx="400" cy="245" r="28" fill="#EF4444"/>
+  <text x="400" y="254" font-family="system-ui, sans-serif" font-size="26" font-weight="900" fill="#FFFFFF" text-anchor="middle">≠</text>
+
+  <!-- Bottom Notice -->
+  <rect x="70" y="405" width="660" height="45" rx="10" fill="#FEF3C7" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="400" y="432" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#92400E" text-anchor="middle">💥 Забыли вызвать сеттер в одной ветке if/else — интерфейс навсегда расходится с данными!</text>
+</svg>

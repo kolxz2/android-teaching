@@ -1,0 +1,36 @@
+/* Only the student practice deck uses this single-column code layout. */
+.slide.is-content.layout-code-focus h1 {
+  font-size: clamp(28px, 3vw, 42px);
+  max-width: none;
+}
+
+.slide.is-content.layout-code-focus .body {
+  display: block;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+  font-size: clamp(17px, 1.5vw, 22px);
+  line-height: 1.4;
+}
+
+.slide.is-content.layout-code-focus .body pre {
+  width: 100%;
+  max-width: 1050px;
+  max-height: none;
+  margin: 12px 0 16px;
+  padding: 38px 20px 18px;
+  overflow: visible;
+}
+
+.slide.is-content.layout-code-focus .body pre code {
+  font-size: clamp(14px, 1.15vw, 18px);
+  line-height: 1.4;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.slide.is-content.layout-code-focus .body p {
+  max-width: 90ch;
+  margin: 0 0 12px;
+}

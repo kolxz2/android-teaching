@@ -41,26 +41,26 @@ window.COURSE = {
     {
       "id": "05",
       "slug": "05-activity",
-      "title": "Activity, состояние и жизненный цикл Compose",
+      "title": "Подходы к вёрстке: XML и Jetpack Compose. Императивный и декларативный UI",
       "block": "Основы Android",
       "href": "lectures/05-activity/index.html",
-      "goal": "Понимать роль Activity как контейнера Compose и безопасно управлять состоянием экрана."
+      "goal": "Сравнивать XML/View и Jetpack Compose, понимать императивный и декларативный подходы к UI."
     },
     {
       "id": "06",
       "slug": "06-compose-ui",
-      "title": "Jetpack Compose: layout, Material 3 и тема",
+      "title": "Основы вёрстки на Jetpack Compose",
       "block": "Основы Android",
       "href": "lectures/06-compose-ui/index.html",
-      "goal": "Создавать адаптивные экраны декларативно с помощью Jetpack Compose и Material 3."
+      "goal": "Собирать экран FinanceApp из Column, Row, Box, Card и LazyColumn, применять Modifier и управлять локальным состоянием."
     },
     {
       "id": "07",
       "slug": "07-compose-lists",
-      "title": "Списки в Compose: LazyColumn и состояние",
+      "title": "ViewModel и состояние экрана в Compose",
       "block": "Основы Android",
       "href": "lectures/07-compose-lists/index.html",
-      "goal": "Эффективно показывать списки данных в Compose и обрабатывать действия пользователя."
+      "goal": "Понимать ViewModel, события и состояние экрана; реализовать ввод транзакции в FinanceApp."
     },
     {
       "id": "08",
@@ -167,6 +167,16 @@ window.COURSE = {
       "block": "Переход к Android",
       "href": "practice/kotlin-04/index.html",
       "goal": "Безопасно перенести старый XML/View-проект на Compose, реализовать состояние, события и чистый reducer."
+    },
+    {
+      "id": "finance-07",
+      "kind": "practice",
+      "afterLecture": "07",
+      "slug": "finance-07-practice",
+      "title": "Практика 07: экран транзакции с ViewModel",
+      "block": "Основы Android",
+      "href": "lectures/07-compose-lists/practice.html",
+      "goal": "За 40 шагов подключить ViewModel, создать события, обработать ввод и собрать экран транзакции."
     }
   ]
 };

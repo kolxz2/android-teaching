@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 480" width="100%" height="100%">
+  <defs>
+    <linearGradient id="vmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="uiBoxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <filter id="shadow6" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.12"/>
+    </filter>
+    <marker id="arrowDown" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#10B981"/>
+    </marker>
+    <marker id="arrowUp" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#F59E0B"/>
+    </marker>
+  </defs>
+
+  <rect width="100%" height="100%" fill="#F8FAFC" rx="16"/>
+
+  <text x="400" y="48" font-family="system-ui, sans-serif" font-size="22" font-weight="800" fill="#0F172A" text-anchor="middle">Архитектурный паттерн: UDF</text>
+  <text x="400" y="74" font-family="system-ui, sans-serif" font-size="14" fill="#64748B" text-anchor="middle">Unidirectional Data Flow — Однонаправленный поток данных</text>
+
+  <!-- Top Box: ViewModel -->
+  <g filter="url(#shadow6)">
+    <rect x="200" y="100" width="400" height="90" rx="16" fill="url(#vmGrad)"/>
+    <text x="400" y="138" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle">ViewModel / Держатель состояния</text>
+    <text x="400" y="162" font-family="monospace" font-size="13" fill="#94A3B8" text-anchor="middle">Single Source of Truth (Единый источник истины)</text>
+  </g>
+
+  <!-- Arrow DOWN: State -->
+  <path d="M 280 200 L 280 280" stroke="#10B981" stroke-width="4" fill="none" marker-end="url(#arrowDown)"/>
+  <rect x="150" y="225" width="120" height="30" rx="6" fill="#D1FAE5"/>
+  <text x="210" y="245" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#065F46" text-anchor="middle">STATE (вниз) ↓</text>
+
+  <!-- Arrow UP: Events -->
+  <path d="M 520 280 L 520 200" stroke="#F59E0B" stroke-width="4" fill="none" marker-end="url(#arrowUp)"/>
+  <rect x="530" y="225" width="130" height="30" rx="6" fill="#FEF3C7"/>
+  <text x="595" y="245" font-family="system-ui, sans-serif" font-size="12" font-weight="800" fill="#92400E" text-anchor="middle">EVENTS (вверх) ↑</text>
+
+  <!-- Bottom Box: Composable UI -->
+  <g filter="url(#shadow6)">
+    <rect x="200" y="295" width="400" height="90" rx="16" fill="url(#uiBoxGrad)"/>
+    <text x="400" y="333" font-family="system-ui, sans-serif" font-size="18" font-weight="800" fill="#FFFFFF" text-anchor="middle">@Composable UI Экран</text>
+    <text x="400" y="357" font-family="system-ui, sans-serif" font-size="13" fill="#DBEAFE" text-anchor="middle">Stateless представление (только отображение данных)</text>
+  </g>
+
+  <!-- Summary text -->
+  <rect x="100" y="415" width="600" height="38" rx="8" fill="#F1F5F9"/>
+  <text x="400" y="439" font-family="system-ui, sans-serif" font-size="13" font-weight="700" fill="#334155" text-anchor="middle">UI отображает данные и шлёт события кликов. Логика обновляет State. Цикл замкнут.</text>
+</svg>

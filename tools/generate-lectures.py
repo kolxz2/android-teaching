@@ -133,86 +133,80 @@ LECTURE_META = [
             "PR lecture-04",
         ],
         "branch": "lecture-04",
-        "next": "Лекция 5 — Activity, состояние и жизненный цикл Compose",
+        "next": "Лекция 5 — XML/View и Jetpack Compose",
     },
     {
         "id": "05",
         "slug": "05-activity",
-        "title": "Activity, состояние и жизненный цикл Compose",
+        "title": "Подходы к вёрстке: XML и Jetpack Compose. Императивный и декларативный UI",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Понимать роль Activity как контейнера Compose и безопасно управлять состоянием экрана.",
+        "goal": "Сравнивать XML/View и Jetpack Compose, понимать императивный и декларативный подходы к UI.",
         "theory": [
-            "Компоненты приложения: зачем четыре типа (обзор)",
-            "ComponentActivity как точка входа и контейнер Compose",
-            "Context: зачем нужен, Activity vs applicationContext",
-            "setContent, дерево композиции и рекомпозиция",
-            "Жизненный цикл Activity",
-            "Состояние: remember, mutableStateOf и rememberSaveable",
-            "Подъём состояния и однонаправленный поток данных",
+            "Эволюция вёрстки Android: XML + View и Jetpack Compose",
+            "View, ViewGroup, layout-файлы и ViewBinding",
+            "Императивное обновление View и рассинхронизация состояния",
+            "Декларативный UI, рекомпозиция и UDF",
+            "Сравнение одного экрана на XML и Compose",
         ],
         "practice": [
-            "Экран формы на Compose с состоянием, поднятым в родительский composable",
-            "Поворот экрана без потери введённых данных через rememberSaveable",
+            "Сравнить реализацию формы на XML/ViewBinding и Compose",
+            "Переписать императивное обновление UI на composable-функции",
         ],
         "homework": [
-            "Экран Compose с состоянием и событиями",
-            "Корректное восстановление состояния после поворота",
+            "Реализовать интерактивный экран на Compose",
+            "В README сравнить подходы XML и Compose",
             "PR lecture-05",
         ],
         "branch": "lecture-05",
-        "next": "Лекция 6 — Jetpack Compose: layout, Material 3 и тема",
+        "next": "Лекция 6 — Основы вёрстки на Jetpack Compose",
     },
     {
         "id": "06",
         "slug": "06-compose-ui",
-        "title": "Jetpack Compose: layout, Material 3 и тема",
+        "title": "Основы вёрстки на Jetpack Compose",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Создавать адаптивные экраны декларативно с помощью Jetpack Compose и Material 3.",
+        "goal": "Собирать экран FinanceApp из Column, Row, Box, Card и LazyColumn, применять Modifier и управлять локальным состоянием.",
         "theory": [
-            "Декларативный UI и правила работы composable-функций",
-            "Row, Column, Box и базовые элементы Material 3",
-            "Modifier: размер, отступы, фон, порядок модификаторов",
-            "Text, TextField, Button, Image и прокрутка",
-            "dp, sp, WindowInsets и адаптивные ограничения",
-            "MaterialTheme: цветовая схема, типографика и формы",
+            "setContent, composable-функции и декларативное дерево UI",
+            "Column, Row, Box, оси, выравнивание и weight",
+            "Modifier: размеры, отступы, фон и порядок вызовов",
+            "dp, ограничения родителя и безопасные системные области",
+            "Card, типографика Material 3 и переиспользование компонентов",
+            "LazyColumn, item, items и устойчивые ключи",
+            "Элементы ввода, rememberSaveable и локальное состояние",
         ],
         "practice": [
-            "Экран формы или профиля на Compose",
-            "Превью, тема и переиспользуемые composable-компоненты",
+            "Разбор FinanceApp на ветке lecture-06",
+            "Изменение weight, Box alignment и порядка модификаторов",
+            "Добавление операции и передача баланса параметром",
         ],
         "homework": [
-            "Сверстать 1–2 экрана по макету (или по скрину преподавателя)",
-            "Строки вынесены в ресурсы, цвета и типографика заданы темой",
-            "PR lecture-06",
+            "Сверстать карточку финансовой цели и список операций",
+            "Использовать переиспользуемый composable и устойчивый ключ",
+            "Сдать PR с объяснением размещения состояния",
         ],
         "branch": "lecture-06",
-        "next": "Лекция 7 — Списки в Compose: LazyColumn и состояние",
+        "next": "Лекция 7 — ViewModel и состояние экрана в Compose",
     },
     {
         "id": "07",
         "slug": "07-compose-lists",
-        "title": "Списки в Compose: LazyColumn и состояние",
+        "title": "ViewModel и состояние экрана в Compose",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Эффективно показывать списки данных в Compose и обрабатывать действия пользователя.",
+        "goal": "Понимать ViewModel, события и состояние экрана; реализовать ввод транзакции в FinanceApp.",
         "theory": [
-            "LazyColumn и LazyRow: ленивое создание элементов",
-            "items, стабильные key и contentType",
-            "Карточка элемента и события через лямбды",
-            "Состояния загрузки, пустого списка и ошибки",
-            "Производительность, стабильность параметров и derivedStateOf",
+            "ViewModel: роль, владелец и жизненный цикл",
+            "MainUiState и MainUiEvent: однонаправленный поток данных",
+            "mutableStateOf, reducer и рекомпозиция Compose",
+            "Проверка ввода и текстовые ресурсы",
         ],
         "practice": [
-            "LazyColumn со списком из data-классов лекции 3",
-            "Переход на экран деталей по клику",
+            "Повторить экран транзакции по отдельной презентации из 17 шагов",
         ],
-        "homework": [
-            "Список + детали в сквозном приложении",
-            "Переиспользуемая карточка и корректные ключи элементов",
-            "PR lecture-07",
-        ],
+        "homework": [],
         "branch": "lecture-07",
         "next": "Лекция 8 — Navigation Compose",
     },
@@ -473,6 +467,26 @@ PRACTICES = [
         "href": "practice/kotlin-03/index.html",
         "goal": "Классы, data class, интерфейсы и композиция в Kotlin; затем разбор классов первого Android-проекта на Jetpack Compose.",
     },
+    {
+        "id": "kotlin-04",
+        "kind": "practice",
+        "afterLecture": "04",
+        "slug": "kotlin-04-practice",
+        "title": "Практика 04: обновление FinanceApp и первый экран Compose",
+        "block": "Переход к Android",
+        "href": "practice/kotlin-04/index.html",
+        "goal": "Безопасно перенести старый XML/View-проект на Compose, реализовать состояние, события и чистый reducer.",
+    },
+    {
+        "id": "finance-07",
+        "kind": "practice",
+        "afterLecture": "07",
+        "slug": "finance-07-practice",
+        "title": "Практика 07: экран транзакции с ViewModel",
+        "block": "Основы Android",
+        "href": "lectures/07-compose-lists/practice.html",
+        "goal": "За 40 шагов подключить ViewModel, создать события, обработать ввод и собрать экран транзакции.",
+    },
 ]
 
 INDEX_HTML = """<!DOCTYPE html>
@@ -568,12 +582,10 @@ def course_plan_md() -> str:
                 "",
                 bullets_md(meta["practice"]),
                 "",
-                "**Самостоятельная работа**",
-                "",
-                bullets_md(meta["homework"]),
-                "",
             ]
         )
+        if meta["homework"]:
+            sections.extend(["**Самостоятельная работа**", "", bullets_md(meta["homework"]), ""])
         if meta.get("final_checklist"):
             sections.extend(
                 ["**Итоговый проект**", "", bullets_md(meta["final_checklist"]), ""]
@@ -760,14 +772,15 @@ def main() -> None:
     for meta in LECTURE_META:
         folder = LECTURES / meta["slug"]
         folder.mkdir(parents=True, exist_ok=True)
-        (folder / "plan.md").write_text(plan_md(meta), encoding="utf-8")
-        (folder / "index.html").write_text(
-            INDEX_HTML.format(id=meta["id"], title=meta["title"]),
-            encoding="utf-8",
-        )
-        # Лекции 1 и 2 содержат расширенные авторские слайды и не должны
+        if meta["id"] not in {"05", "06", "07"}:
+            (folder / "plan.md").write_text(plan_md(meta), encoding="utf-8")
+            (folder / "index.html").write_text(
+                INDEX_HTML.format(id=meta["id"], title=meta["title"]),
+                encoding="utf-8",
+            )
+        # Лекции 1–7 содержат расширенные авторские слайды и не должны
         # перезаписываться кратким шаблоном при обновлении структуры курса.
-        if meta["id"] not in {"01", "02"}:
+        if meta["id"] not in {"01", "02", "03", "04", "05", "06", "07"}:
             write_slides_js(folder / "slides.js", meta, outline_slides(meta))
         catalog.append(
             {

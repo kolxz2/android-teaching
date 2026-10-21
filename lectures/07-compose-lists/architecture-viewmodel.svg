@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Архитектура экрана транзакции: Compose, ViewModel, состояние и события</title>
+  <desc id="desc">События идут от экрана Compose во ViewModel. ViewModel создаёт новое состояние, которое читает Compose. ViewModel привязана к ViewModelStoreOwner Activity.</desc>
+  <defs>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#2774dd"/></marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="12" markerHeight="12" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#2b9b70"/></marker>
+    <style>
+      text{font-family:Arial,sans-serif;fill:#183049} .title{font-size:48px;font-weight:700} .subtitle{font-size:25px;fill:#50657a} .box{fill:white;stroke:#b9cee0;stroke-width:3;rx:28} .head{font-size:34px;font-weight:700} .body{font-size:25px} .small{font-size:23px;fill:#50657a} .label{font-size:25px;font-weight:700} .chip{fill:#ecf5ff;stroke:#c6dff8;stroke-width:2;rx:18}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="#f5f9fd"/>
+  <text x="80" y="95" class="title">Один экран — один владелец состояния</text>
+  <text x="80" y="140" class="subtitle">FinanceApp · лекция 7 · однонаправленный поток данных</text>
+  <rect class="box" x="85" y="245" width="530" height="365"/>
+  <text x="125" y="310" class="head">Compose UI</text>
+  <text x="125" y="365" class="body">TransactionScreen</text>
+  <text x="125" y="410" class="body">OutlinedTextField · FilterChip</text>
+  <text x="125" y="455" class="body">Button · Text · stringResource</text>
+  <text x="125" y="525" class="small">Рисует текущее состояние</text>
+  <rect class="box" x="985" y="245" width="530" height="365"/>
+  <text x="1025" y="310" class="head">TransactionViewModel</text>
+  <text x="1025" y="365" class="body">onEvent(event)</text>
+  <text x="1025" y="410" class="body">reduce(state, event)</text>
+  <text x="1025" y="455" class="body">mutableStateOf(MainUiState)</text>
+  <text x="1025" y="525" class="small">Проверяет и обновляет данные</text>
+  <path d="M620 340 H972" stroke="#2774dd" stroke-width="10" fill="none" marker-end="url(#arrowBlue)"/>
+  <text x="680" y="320" class="label" fill="#2774dd">MainUiEvent →</text>
+  <path d="M980 500 H628" stroke="#2b9b70" stroke-width="10" fill="none" marker-end="url(#arrowGreen)"/>
+  <text x="688" y="480" class="label" fill="#2b9b70">← MainUiState</text>
+  <rect class="chip" x="385" y="705" width="830" height="105"/>
+  <text x="425" y="750" class="body">MainActivity — ViewModelStoreOwner</text>
+  <text x="425" y="790" class="small">viewModel() возвращает ViewModel, связанную с владельцем</text>
+</svg>

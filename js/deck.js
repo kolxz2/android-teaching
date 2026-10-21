@@ -40,7 +40,11 @@
     return escapeHtml(s)
       .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+|\.\.?\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
       .replace(/`([^`]+)`/g, "<code>$1</code>")
-      .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+      .replace(/\*\*\*(.+?)\*\*\*/g, "<strong><em>$1</em></strong>")
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/__(.+?)__/g, "<strong>$1</strong>")
+      .replace(/(^|[^\*])\*([^\s\*][^\*\n]*?[^\s\*]|[^\s\*])\*(?!\*)/g, "$1<strong>$2</strong>")
+      .replace(/(^|[^_])_([^\s_][^_\n]*?[^\s_]|[^\s_])_(?!_)/g, "$1<em>$2</em>");
   }
 
   const LANGUAGE_ALIASES = {
@@ -235,11 +239,30 @@
         continue;
       }
 
+      if (/^#{1,4}\s+/.test(line.trim())) {
+        const m = line.trim().match(/^(#{1,4})\s+(.+)$/);
+        const level = Math.min(6, m[1].length + 2); // # -> h3, ## -> h4, ### -> h5
+        html += `<h${level} class="speaker-theory-heading">${inline(m[2])}</h${level}>`;
+        i += 1;
+        continue;
+      }
+
+      if (/^\s*>\s+/.test(line)) {
+        const quote = [];
+        while (i < lines.length && /^\s*>\s+/.test(lines[i])) {
+          quote.push(lines[i].replace(/^\s*>\s+/, ""));
+          i += 1;
+        }
+        html += `<blockquote class="speaker-quote">${quote.map(q => inline(q)).join("<br>")}</blockquote>`;
+        continue;
+      }
+
       const para = [];
       while (
         i < lines.length &&
         lines[i].trim() &&
-        !/^\s*[-|]/.test(lines[i]) &&
+        !/^\s*[-|>]/.test(lines[i]) &&
+        !/^#{1,4}\s+/.test(lines[i].trim()) &&
         !lines[i].trim().startsWith("```") &&
         !/^\s*\d+\.\s+/.test(lines[i])
       ) {
@@ -247,6 +270,9 @@
         i += 1;
       }
       flushPara(para);
+      if (para.length === 0 && i < lines.length) {
+        i += 1;
+      }
     }
 
     return html;
@@ -575,15 +601,75 @@
     <button class="nav-btn" id="prev" type="button">←</button>
     <button class="nav-btn" id="next" type="button">→</button>
     <button class="nav-btn" id="fs" type="button">Экран</button>
-    <span class="hint">стрелки · пробел · F полноэкранный · N заметки</span>
+    <button class="nav-btn nav-btn-info" id="info" type="button" title="Материал для лектора (i)" aria-label="Материал для лектора">i</button>
+    <span class="hint">стрелки · пробел · F экран · I лектору</span>
     <span class="counter" id="counter"></span>
   `;
   document.body.appendChild(chrome);
 
-  const notes = document.createElement("aside");
-  notes.className = "notes";
-  notes.id = "notes";
-  document.body.appendChild(notes);
+  const speakerPanel = document.createElement("aside");
+  speakerPanel.className = "speaker-panel";
+  speakerPanel.id = "speaker-panel";
+  speakerPanel.setAttribute("aria-label", "Теория и документация к слайду");
+  speakerPanel.innerHTML = `
+    <div class="speaker-panel-header">
+      <div class="speaker-panel-title">
+        <span class="speaker-panel-badge">📖</span>
+        <span>Теория и документация</span>
+      </div>
+      <button class="speaker-panel-close" id="speaker-close" type="button" title="Закрыть панель (Esc)">✕</button>
+    </div>
+    <div class="speaker-panel-content" id="speaker-content"></div>
+  `;
+  document.body.appendChild(speakerPanel);
+
+  function toggleSpeakerPanel(force) {
+    notesOn = typeof force === "boolean" ? force : !notesOn;
+    speakerPanel.classList.toggle("is-open", notesOn);
+    document.body.classList.toggle("speaker-panel-open", notesOn);
+    const infoBtn = document.getElementById("info");
+    if (infoBtn) infoBtn.classList.toggle("is-active", notesOn);
+    if (notesOn) {
+      updateSpeakerPanel();
+    }
+  }
+
+  function updateSpeakerPanel() {
+    const s = slides[index];
+    if (!s) return;
+    const speakerContent = document.getElementById("speaker-content");
+    if (!speakerContent) return;
+
+    let html = `
+      <div class="speaker-slide-meta">
+        <div class="speaker-slide-num">Слайд ${index + 1} из ${slides.length}</div>
+        <h3 class="speaker-slide-heading">${escapeHtml(s.title || "Без названия")}</h3>
+        ${s.subtitle ? `<div class="speaker-slide-sub">${escapeHtml(s.subtitle)}</div>` : ""}
+      </div>
+    `;
+
+    // Deep theory and technical dossier (from s.theory or fallback s.notes)
+    const content = s.theory || s.notes || "";
+    if (content) {
+      html += `
+        <div class="speaker-card speaker-card-theory">
+          <div class="speaker-card-body">
+            ${renderMarkdown(content)}
+          </div>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="speaker-card">
+          <div class="speaker-card-body">
+            <p class="speaker-empty">Теоретический конспект для этого слайда дополняется.</p>
+          </div>
+        </div>
+      `;
+    }
+
+    speakerContent.innerHTML = html;
+  }
 
   function go(to) {
     index = Math.max(0, Math.min(slides.length - 1, to));
@@ -594,8 +680,9 @@
     document.getElementById("progress").style.width = `${((index + 1) / slides.length) * 100}%`;
     document.getElementById("prev").disabled = index === 0;
     document.getElementById("next").disabled = index === slides.length - 1;
-    const n = slides[index].notes || "";
-    notes.innerHTML = n ? `<strong>Заметки.</strong> ${escapeHtml(n)}` : "Заметок нет.";
+    if (notesOn) {
+      updateSpeakerPanel();
+    }
     history.replaceState(null, "", `#${index + 1}`);
   }
 
@@ -615,6 +702,8 @@
     if (!document.fullscreenElement) document.documentElement.requestFullscreen().catch(() => {});
     else document.exitFullscreen();
   });
+  document.getElementById("info").addEventListener("click", () => toggleSpeakerPanel());
+  document.getElementById("speaker-close").addEventListener("click", () => toggleSpeakerPanel(false));
 
   document.addEventListener("keydown", (e) => {
     const interactive = e.target.closest("input, textarea, select, button, form, [contenteditable='true']");
@@ -631,12 +720,13 @@
       go(slides.length - 1);
     } else if (e.key === "f" || e.key === "F" || e.key === "а" || e.key === "А") {
       document.getElementById("fs").click();
-    } else if (e.key === "n" || e.key === "N" || e.key === "т" || e.key === "Т") {
-      notesOn = !notesOn;
-      notes.classList.toggle("is-on", notesOn);
+    } else if (
+      e.key === "i" || e.key === "I" || e.key === "ш" || e.key === "Ш" ||
+      e.key === "n" || e.key === "N" || e.key === "т" || e.key === "Т"
+    ) {
+      toggleSpeakerPanel();
     } else if (e.key === "Escape") {
-      notesOn = false;
-      notes.classList.remove("is-on");
+      toggleSpeakerPanel(false);
     }
   });
 

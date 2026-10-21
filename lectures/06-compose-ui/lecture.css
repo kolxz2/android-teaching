@@ -1,0 +1,42 @@
+/* Keep the cover readable when the lecturer opens the side panel. */
+@media (min-width: 1080px) {
+  body.speaker-panel-open .layout-cover .body {
+    max-width: 100%;
+  }
+
+  body.speaker-panel-open .layout-cover .body ul {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+}
+
+/* Keep comparison lists legible beside the lecturer panel. */
+@media (min-width: 900px) {
+  body.speaker-panel-open .layout-list-focus .body {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  body.speaker-panel-open .layout-list-focus .body > ul {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 4px;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1079px) {
+  body.speaker-panel-open .slide {
+    right: 400px;
+    padding-left: 36px;
+    padding-right: 24px;
+  }
+
+  body.speaker-panel-open .slide.is-content h1 {
+    max-width: 100%;
+    font-size: 28px;
+  }
+
+  body.speaker-panel-open .slide .body {
+    min-width: 0;
+    font-size: 18px;
+  }
+}
