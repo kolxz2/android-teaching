@@ -208,31 +208,26 @@ LECTURE_META = [
         ],
         "homework": [],
         "branch": "lecture-07",
-        "next": "Лекция 8 — Navigation Compose",
+        "next": "Лекция 8 — базы данных и Room",
     },
     {
         "id": "08",
         "slug": "08-navigation-compose",
-        "title": "Navigation Compose",
+        "title": "Базы данных и Room",
         "block": "Основы Android",
         "minutes": "90",
-        "goal": "Собрать многоэкранное Compose-приложение с типобезопасной навигацией и понятным back stack.",
+        "goal": "Спроектировать реляционную базу и сохранить историю FinanceApp через Room.",
         "theory": [
-            "Navigation Compose: NavHost, NavController и destinations",
-            "Маршруты и типобезопасная передача аргументов",
-            "Вложенные графы и структура навигации",
-            "Сохранение состояния экранов",
-            "Back stack",
+            "Таблицы, ключи, связи и базовые SQL-запросы",
+            "Классы SQL-команд: DDL, DQL, DML, DCL и TCL",
+            "INNER, LEFT, RIGHT, FULL, CROSS и SELF JOIN",
+            "Нормализация до 3НФ на примере FinanceApp",
+            "Room 3: Entity, DAO, Database и KSP",
+            "Flow, Repository, ViewModel и Compose",
+            "Транзакции БД, индексы и миграции схемы",
         ],
-        "practice": [
-            "Связать два composable-экрана через Navigation Compose",
-            "Передача аргумента на экран деталей",
-        ],
-        "homework": [
-            "Сквозное приложение использует Navigation Compose",
-            "Минимум два composable-экрана в графе",
-            "PR lecture-08",
-        ],
+        "practice": [],
+        "homework": [],
         "branch": "lecture-08",
         "next": "Лекция 9 — Service, BroadcastReceiver, ContentProvider",
     },
@@ -578,12 +573,10 @@ def course_plan_md() -> str:
                 "",
                 bullets_md(meta["theory"]),
                 "",
-                "**Практика**",
-                "",
-                bullets_md(meta["practice"]),
-                "",
             ]
         )
+        if meta["practice"]:
+            sections.extend(["**Практика**", "", bullets_md(meta["practice"]), ""])
         if meta["homework"]:
             sections.extend(["**Самостоятельная работа**", "", bullets_md(meta["homework"]), ""])
         if meta.get("final_checklist"):
@@ -772,15 +765,15 @@ def main() -> None:
     for meta in LECTURE_META:
         folder = LECTURES / meta["slug"]
         folder.mkdir(parents=True, exist_ok=True)
-        if meta["id"] not in {"05", "06", "07"}:
+        if meta["id"] not in {"05", "06", "07", "08"}:
             (folder / "plan.md").write_text(plan_md(meta), encoding="utf-8")
             (folder / "index.html").write_text(
                 INDEX_HTML.format(id=meta["id"], title=meta["title"]),
                 encoding="utf-8",
             )
-        # Лекции 1–7 содержат расширенные авторские слайды и не должны
+        # Лекции 1–8 содержат расширенные авторские слайды и не должны
         # перезаписываться кратким шаблоном при обновлении структуры курса.
-        if meta["id"] not in {"01", "02", "03", "04", "05", "06", "07"}:
+        if meta["id"] not in {"01", "02", "03", "04", "05", "06", "07", "08"}:
             write_slides_js(folder / "slides.js", meta, outline_slides(meta))
         catalog.append(
             {

@@ -195,28 +195,22 @@
 
 - Отдельная [презентация практики](lectures/07-compose-lists/practice.html): 40 шагов по созданию экрана транзакции
 
-### 8. Navigation Compose
+### 8. Базы данных и Room
 
-Собрать многоэкранное Compose-приложение с типобезопасной навигацией и понятным back stack.
+Теоретическая лекция о реляционной модели, SQL и локальном хранении Android на примере FinanceApp.
 
 **Материал**
 
-- Navigation Compose: NavHost, NavController и destinations
-- Маршруты и типобезопасная передача аргументов
-- Вложенные графы и структура навигации
-- Сохранение состояния экранов
-- Back stack
+- Таблицы, строки, типы, первичные и внешние ключи
+- DDL, DQL, DML, DCL и TCL
+- SQL: CRUD, фильтрация, сортировка и агрегаты
+- INNER, LEFT, RIGHT, FULL, CROSS и SELF JOIN
+- Аномалии данных и нормализация до 3НФ
+- Room 3: Entity, DAO, Database, KSP и создание базы
+- Flow, Repository, ViewModel и Compose
+- Транзакции БД, индексы, версии схемы и миграции
 
-**Практика**
-
-- Связать два composable-экрана через Navigation Compose
-- Передача аргумента на экран деталей
-
-**Самостоятельная работа**
-
-- Сквозное приложение использует Navigation Compose
-- Минимум два composable-экрана в графе
-- PR lecture-08
+Материалы: `lectures/08-navigation-compose/` (исторический путь каталога сохранён для ссылок).
 
 ### 9. Service, BroadcastReceiver, ContentProvider, Bundle
 

@@ -37,14 +37,20 @@
   }
 
   function inline(s) {
-    return escapeHtml(s)
+    const codeSpans = [];
+    const text = escapeHtml(s).replace(/`([^`]+)`/g, (_, code) => {
+      const token = `\u0001CODE${codeSpans.length}\u0001`;
+      codeSpans.push(`<code>${code}</code>`);
+      return token;
+    });
+    return text
       .replace(/\[([^\]]+)\]\((https:\/\/[^\s)]+|\.\.?\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
-      .replace(/`([^`]+)`/g, "<code>$1</code>")
       .replace(/\*\*\*(.+?)\*\*\*/g, "<strong><em>$1</em></strong>")
       .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
       .replace(/__(.+?)__/g, "<strong>$1</strong>")
       .replace(/(^|[^\*])\*([^\s\*][^\*\n]*?[^\s\*]|[^\s\*])\*(?!\*)/g, "$1<strong>$2</strong>")
-      .replace(/(^|[^_])_([^\s_][^_\n]*?[^\s_]|[^\s_])_(?!_)/g, "$1<em>$2</em>");
+      .replace(/(^|[^_])_([^\s_][^_\n]*?[^\s_]|[^\s_])_(?!_)/g, "$1<em>$2</em>")
+      .replace(/\u0001CODE(\d+)\u0001/g, (_, index) => codeSpans[Number(index)]);
   }
 
   const LANGUAGE_ALIASES = {

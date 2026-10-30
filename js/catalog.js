@@ -65,10 +65,10 @@ window.COURSE = {
     {
       "id": "08",
       "slug": "08-navigation-compose",
-      "title": "Navigation Compose",
+      "title": "Базы данных и Room",
       "block": "Основы Android",
       "href": "lectures/08-navigation-compose/index.html",
-      "goal": "Собрать многоэкранное Compose-приложение с типобезопасной навигацией и понятным back stack."
+      "goal": "Спроектировать реляционную базу и сохранить историю FinanceApp через Room."
     },
     {
       "id": "09",
@@ -177,6 +177,16 @@ window.COURSE = {
       "block": "Основы Android",
       "href": "lectures/07-compose-lists/practice.html",
       "goal": "За 40 шагов подключить ViewModel, создать события, обработать ввод и собрать экран транзакции."
+    },
+    {
+      "id": "finance-08",
+      "kind": "practice",
+      "afterLecture": "08",
+      "slug": "finance-08-practice",
+      "title": "Практика 08: сохранение операций через Room",
+      "block": "Основы Android",
+      "href": "lectures/08-navigation-compose/practice.html",
+      "goal": "Поэтапно подключить Room к FinanceApp и проверить сохранение истории после перезапуска."
     }
   ]
 };
